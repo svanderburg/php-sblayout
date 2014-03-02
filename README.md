@@ -339,7 +339,7 @@ variable.
 We can implement the `fruitname.inc.php` to simply display the parameter:
 
     <?php
-    <p><?php print($GLOBALS["query"]["fruitname"]; ?></p>
+    <p><?php print($GLOBALS["query"]["fruitname"]); ?></p>
     ?>
 
 If we address the page with: `http://localhost/index.php/fruitname/apples` we
