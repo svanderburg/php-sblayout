@@ -1,7 +1,7 @@
 php-sblayout
 ============
 This package contains a PHP library that makes my life a bit easier while
-developing web applications. I have observed that for many web applications
+developing PHP web applications. I have observed that for many web applications
 that I have developed in the past, all pages all more or less look and behave in
 a quite similar way.
 
@@ -162,6 +162,7 @@ the available sub sub pages per sub page:
     array(
         "header" => new StaticSection("header.inc.php"),
         "menu" => new MenuSection(0),
+        "submenu" => new MenuSection(1),
         "contents" => new ContentsSection(true),
         "footer" => new StaticSection("footer.inc.php")
     ),
@@ -259,28 +260,33 @@ each sub page:
     ),
     
     /* Pages */
-    new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
-        "apples" => new StaticContentPage("Apples", new Contents(
+    new StaticContentPage("Fruit", new Contents(array(
+        "header" => "fruit.inc.php",
+        "contents" => "fruit.inc.php"
+    )), array(
+        "apples" => new StaticContentPage("Apples", new Contents(array(
             "header" => "fruit/apples.inc.php",
             "contents" => "fruit/apples.inc.php"
-        )),
-        "pears" => new StaticContentPage("Pears", new Contents(
+        ))),
+        "pears" => new StaticContentPage("Pears", new Contents(array(
             "header" => "fruit/pears.inc.php",
             "contents" => "fruit/pears.inc.php"
-        )),
-        "oranges" => new StaticContentPage("Oranges", new Contents(
+        ))),
+        "oranges" => new StaticContentPage("Oranges", new Contents(array(
             "header" => "fruit/oranges.inc.php",
             "contents" => "fruit/oranges.inc.php"
-        ))
+        )))
     )
 
 The above model also requires a few additional files that should reside in the
 `header` subdirectory:
 
     header/
-      apples.inc.php
-      pears.inc.php
-      oranges.inc.php
+      fruit.inc.php
+      fruit/
+        apples.inc.php
+        pears.inc.php
+        oranges.inc.php
 
 The above files should display the header for each fruit kind.
 
