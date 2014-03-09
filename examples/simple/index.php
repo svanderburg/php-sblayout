@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_STRICT | E_ALL);
 
-set_include_path("../sblayout");
+set_include_path("../../sblayout");
 
 require_once("layout/model/Application.class.php");
 require_once("layout/model/section/StaticSection.class.php");
