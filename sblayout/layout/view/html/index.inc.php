@@ -1,4 +1,5 @@
 <?php
+require_once("baseurl.inc.php");
 require_once("page.inc.php");
 require_once("controller.inc.php");
 require_once("scripts.inc.php");
@@ -13,10 +14,7 @@ require_once("section.inc.php");
 function displayRequestedPage(Application $application)
 {
 	/* Set baseURL globally so that others can use it for convenience */
-	global $baseURL;
-	$baseURL = dirname($_SERVER["SCRIPT_NAME"]);
-	if($baseURL == "/")
-		$baseURL = "";
+	setBaseURL();
 	
 	/* Lookup current page */
 	$currentPage = lookupCurrentPage($application);
