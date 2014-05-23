@@ -27,7 +27,7 @@ function displayRequestedPage(Application $application)
 <html>
 	<head>
 		<title><?php print($currentPage->title); ?> - <?php print($application->title); ?></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=<?php print($application->charset); ?>">
 		<?php
 		generateScriptSection($application, $currentPage);
 		generateStyleSection($application, $currentPage);
