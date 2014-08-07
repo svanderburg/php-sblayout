@@ -7,11 +7,38 @@ require_once("styles.inc.php");
 require_once("section.inc.php");
 
 /**
+ * Displays the document type declaration.
+ * 
+ * @param string $doctype Document type declaration to display. Supported values are: html4, html4transitional, html5
+ */
+function displayDoctype($doctype)
+{
+	switch($doctype)
+	{
+		case "html4":
+			?>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+			<?php
+			break;
+		case "html4transitional":
+			?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+			<?php
+			break;
+		case "html5":
+			?>
+<!DOCTYPE html>
+			<?php
+			break;
+	}
+}
+
+/**
  * Displays a simple HTML page containing the sections defined in the application layout.
  * 
  * @param Application $application Encoding of the web application layout and pages
  */
-function displayRequestedPage(Application $application)
+function displayRequestedPage(Application $application, $doctype = "html4strict")
 {
 	/* Set baseURL globally so that others can use it for convenience */
 	setBaseURL();
@@ -21,9 +48,10 @@ function displayRequestedPage(Application $application)
 
 	/* Display the controller page */
 	displayController($currentPage);
+	
+	/* Display the doctype */
+	displayDoctype($doctype);
 	?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-
 <html>
 	<head>
 		<title><?php print($currentPage->title); ?> - <?php print($application->title); ?></title>
