@@ -47,30 +47,32 @@ Implementing a very trivial web application
 To create a very trivial web application displaying one page, we must first
 create an index page (`index.php`) composing a simple application model:
 
-    set_include_path("../sblayout");
+```php
+set_include_path("../sblayout");
 
-    require_once("layout/model/Application.class.php");
-    require_once("layout/model/section/StaticSection.class.php");
-    require_once("layout/model/section/ContentsSection.class.php");
-    require_once("layout/model/page/StaticContentPage.class.php");
+require_once("layout/model/Application.class.php");
+require_once("layout/model/section/StaticSection.class.php");
+require_once("layout/model/section/ContentsSection.class.php");
+require_once("layout/model/page/StaticContentPage.class.php");
+
+$application = new Application(
+    /* Title */
+    "Trivial web application",
     
-    $application = new Application(
-        /* Title */
-        "Trivial web application",
-        
-        /* CSS stylesheets */
-        array("default.css"),
-        
-        /* Sections */
-        array(
-            "header" => new StaticSection("header.inc.php"),
-            "contents" => new ContentsSection(true),
-            "footer" => new StaticSection("footer.inc.php")
-        ),
-        
-        /* Pages */
-        new StaticContentPage("Fruit", new Contents("fruit.inc.php"))
-    );
+    /* CSS stylesheets */
+    array("default.css"),
+    
+    /* Sections */
+    array(
+        "header" => new StaticSection("header.inc.php"),
+        "contents" => new ContentsSection(true),
+        "footer" => new StaticSection("footer.inc.php")
+    ),
+    
+    /* Pages */
+    new StaticContentPage("Fruit", new Contents("fruit.inc.php"))
+);
+```
 
 In the above code fragement, we compose an application model in which every sub
 page consists of three sections. The `header` and `footer` always display the
@@ -82,8 +84,10 @@ settings from the `default.css` stylesheet.
 
 We can display a sub page by appending the following lines to `index.php`:
 
-    require_once("layout/view/html/index.inc.php");
-    displayRequestedPage($application);
+```php
+require_once("layout/view/html/index.inc.php");
+displayRequestedPage($application);
+```
 
 The above code fragement composes an HTML page from the code snippets for each
 section that we have defined in the model. Each section translates to `div`
@@ -94,14 +98,16 @@ After creating the model and view, we must implement the code for the static
 sections and sub pages. The above model expects to have a directory structure
 that looks as follows:
 
-    styles/
-      default.css
-    sections/
-      header.inc.php
-      footer.inc.php
-    contents/
-      fruit.inc.php
-    index.php
+```php
+styles/
+  default.css
+sections/
+  header.inc.php
+  footer.inc.php
+contents/
+  fruit.inc.php
+index.php
+```
 
 The files to which the `StaticSection` objects refer should reside in
 `sections/`, stylesheets should reside in `styles/` and the contents of every sub
@@ -113,28 +119,34 @@ We can adapt the page parameter to refer to a collection of sub pages by adding
 an additional parameter to the constructor. Each element in the array represents
 a sub page displaying a specific kind of fruit:
 
-    /* Pages */
-    new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
-        "apples" => new StaticContentPage("Apples", new Contents("fruit/apples.inc.php")),
-        "pears" => new StaticContentPage("Pears", new Contents("fruit/pears.inc.php")),
-        "oranges" => new StaticContentPage("Oranges", new Contents("fruit/oranges.inc.php"))
-    ))
+```php
+/* Pages */
+new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
+    "apples" => new StaticContentPage("Apples", new Contents("fruit/apples.inc.php")),
+    "pears" => new StaticContentPage("Pears", new Contents("fruit/pears.inc.php")),
+    "oranges" => new StaticContentPage("Oranges", new Contents("fruit/oranges.inc.php"))
+))
+```
 
 By adding a menu section, we can automatically show a menu section on every page
 that displays links to their sub pages and marks the link that is currently
 selected as such. Do that we must add the following include to `index.php`:
 
-    require_once("layout/model/section/MenuSection.class.php");
+```php
+require_once("layout/model/section/MenuSection.class.php");
+```
 
 and we can change the sections parameter to include a menu section:
 
-    /* Sections */
-    array(
-        "header" => new StaticSection("header.inc.php"),
-        "menu" => new MenuSection(0),
-        "contents" => new ContentsSection(true),
-        "footer" => new StaticSection("footer.inc.php")
-    ),
+```php
+/* Sections */
+array(
+    "header" => new StaticSection("header.inc.php"),
+    "menu" => new MenuSection(0),
+    "contents" => new ContentsSection(true),
+    "footer" => new StaticSection("footer.inc.php")
+),
+```
 
 We must also add a couple of additional files that display the contents of each
 sub page:
@@ -158,30 +170,32 @@ It is also possible to have multiple levels of subpages. For example, we can als
 add sub pages to sub pages and an additional menu section (`submenu`) displaying
 the available sub sub pages per sub page:
 
-    /* Sections */
-    array(
-        "header" => new StaticSection("header.inc.php"),
-        "menu" => new MenuSection(0),
-        "submenu" => new MenuSection(1),
-        "contents" => new ContentsSection(true),
-        "footer" => new StaticSection("footer.inc.php")
-    ),
-    
-    /* Pages */
-    new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
-        "apples" => new StaticContentPage("Apples", new Contents("fruit/apples.inc.php"), array(
-            "red" => new StaticContentPage("Red", new Contents("fruit/apples/red.inc.php")),
-            "green" => new StaticContentPage("Red", new Contents("fruit/apples/green.inc.php"))
-        )),
-        "pears" => new StaticContentPage("Pears", new Contents("fruit/pears.inc.php"), array(
-            "yellow" => new StaticContentPage("Yellow", new Contents("fruit/pears/yellow.inc.php")),
-            "green" => new StaticContentPage("Green", new Contents("fruit/pears/green.inc.php"))
-        )),
-        "oranges" => new StaticContentPage("Oranges", new Contents("fruit/oranges.inc.php"), array(
-            "orange" => new StaticContentPage("Orange", new Contents("fruit/oranges/orange.inc.php")),
-            "yellow" => new StaticContentPage("Yellow", new Contents("fruit/oranges/yellow.inc.php"))
-        ))
+```php
+/* Sections */
+array(
+    "header" => new StaticSection("header.inc.php"),
+    "menu" => new MenuSection(0),
+    "submenu" => new MenuSection(1),
+    "contents" => new ContentsSection(true),
+    "footer" => new StaticSection("footer.inc.php")
+),
+
+/* Pages */
+new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
+    "apples" => new StaticContentPage("Apples", new Contents("fruit/apples.inc.php"), array(
+        "red" => new StaticContentPage("Red", new Contents("fruit/apples/red.inc.php")),
+        "green" => new StaticContentPage("Red", new Contents("fruit/apples/green.inc.php"))
+    )),
+    "pears" => new StaticContentPage("Pears", new Contents("fruit/pears.inc.php"), array(
+        "yellow" => new StaticContentPage("Yellow", new Contents("fruit/pears/yellow.inc.php")),
+        "green" => new StaticContentPage("Green", new Contents("fruit/pears/green.inc.php"))
+    )),
+    "oranges" => new StaticContentPage("Oranges", new Contents("fruit/oranges.inc.php"), array(
+        "orange" => new StaticContentPage("Orange", new Contents("fruit/oranges/orange.inc.php")),
+        "yellow" => new StaticContentPage("Yellow", new Contents("fruit/oranges/yellow.inc.php"))
     ))
+))
+```
 
 Similar to the previous example, a submenu section displays the subpages of a
 particular fruit kind.
@@ -203,13 +217,15 @@ Moreover, pages that are inaccessible should display a 403 error page.
 These error pages can be defined by adding them as a sub page to the entry page
 with keys `403` and `404`:
 
-    /* Pages */
-    new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
-        "403" => new StaticContentPage("Forbidden", new Contents("error/403.inc.php")),
-        "404" => new StaticContentPage("Page not found", new Contents("error/404.inc.php"))
-        ...
-    ))
-    
+```php
+/* Pages */
+new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
+    "403" => new StaticContentPage("Forbidden", new Contents("error/403.inc.php")),
+    "404" => new StaticContentPage("Page not found", new Contents("error/404.inc.php"))
+    ...
+))
+```
+
 Security handling
 -----------------
 If it is desired to secure a page from unauthorized access, you can implement
@@ -220,15 +236,17 @@ an end user is authorized to view it.
 For example, the following class implements a page displaying content that denies
 access to everyone:
 
-    require_once("layout/model/page/ContentPage.class.php");
-    
-    class InaccessibleContentPage extends ContentPage
+```php
+require_once("layout/model/page/ContentPage.class.php");
+
+class InaccessibleContentPage extends ContentPage
+{
+    public function checkAccessibility()
     {
-        public function checkAccessibility()
-        {
-            return false;
-        }
+        return false;
     }
+}
+```
 
 You can do in the body of `checkAccessibility()` whatever you want. For example,
 you can also change it to take some cookie values containing a username and
@@ -251,32 +269,34 @@ string to an array, we can specify the contents of each content section of page.
 The following model makes the header as well as the contents sections dynamic for
 each sub page:
 
-    /* Sections */
-    array(
-        "header" => new ContentsSection(false),
-        "menu" => new MenuSection(0),
-        "contents" => new ContentsSection(true),
-        "footer" => new StaticSection("footer.inc.php")
-    ),
-    
-    /* Pages */
-    new StaticContentPage("Fruit", new Contents(array(
-        "header" => "fruit.inc.php",
-        "contents" => "fruit.inc.php"
-    )), array(
-        "apples" => new StaticContentPage("Apples", new Contents(array(
-            "header" => "fruit/apples.inc.php",
-            "contents" => "fruit/apples.inc.php"
-        ))),
-        "pears" => new StaticContentPage("Pears", new Contents(array(
-            "header" => "fruit/pears.inc.php",
-            "contents" => "fruit/pears.inc.php"
-        ))),
-        "oranges" => new StaticContentPage("Oranges", new Contents(array(
-            "header" => "fruit/oranges.inc.php",
-            "contents" => "fruit/oranges.inc.php"
-        )))
-    )
+```php
+/* Sections */
+array(
+    "header" => new ContentsSection(false),
+    "menu" => new MenuSection(0),
+    "contents" => new ContentsSection(true),
+    "footer" => new StaticSection("footer.inc.php")
+),
+
+/* Pages */
+new StaticContentPage("Fruit", new Contents(array(
+    "header" => "fruit.inc.php",
+    "contents" => "fruit.inc.php"
+)), array(
+    "apples" => new StaticContentPage("Apples", new Contents(array(
+        "header" => "fruit/apples.inc.php",
+        "contents" => "fruit/apples.inc.php"
+    ))),
+    "pears" => new StaticContentPage("Pears", new Contents(array(
+        "header" => "fruit/pears.inc.php",
+        "contents" => "fruit/pears.inc.php"
+    ))),
+    "oranges" => new StaticContentPage("Oranges", new Contents(array(
+        "header" => "fruit/oranges.inc.php",
+        "contents" => "fruit/oranges.inc.php"
+    )))
+)
+```
 
 The above model also requires a few additional files that should reside in the
 `header` subdirectory:
@@ -298,13 +318,15 @@ page (for example) contains a form.
 The contents object can also take a controller parameter that invokes a PHP
 snippet that is processed before any HTML output is rendered:
 
-    /* Pages */
-    
-    new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
-        ...
-        "question" => new StaticContentPage("Question", new Contents("question.inc.php", "question.inc.php")),
-        ...
-    )
+```php
+/* Pages */
+
+new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
+    ...
+    "question" => new StaticContentPage("Question", new Contents("question.inc.php", "question.inc.php")),
+    ...
+)
+```
 
 The above code fragment adds a sub page that displays a form asking the user a
 question what his/her favorite fruit kind is. After a user submits his answer
@@ -324,18 +346,22 @@ Instead of using the path components in a URL to address sub pages, we may also
 want to use path components as parameters instead. To use path components as
 parameters, we can use objects that are instance of `DynamicContentPage`:
 
-    require_once("layout/model/page/DynamicContentPage.class.php");
+```php
+require_once("layout/model/page/DynamicContentPage.class.php");
+```
 
 The following code fragments adds a sub page having a sub page that interprets
 the a component:
 
-    /* Pages */
-    
-    new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
-        ...
-        "fruitname" => new DynamicContentPage("Display fruit name", "fruitname", new Contents("fruitname.inc.php"))
-        ...
-    )
+```php
+/* Pages */
+
+new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
+    ...
+    "fruitname" => new DynamicContentPage("Display fruit name", "fruitname", new Contents("fruitname.inc.php"))
+    ...
+)
+```
 
 The first parameter of the constructor contains the title, the second the name of
 the variable that will be set when the sub page is processed, and the third
@@ -344,9 +370,11 @@ variable.
 
 We can implement the `fruitname.inc.php` to simply display the parameter:
 
-    <?php
-    <p><?php print($GLOBALS["query"]["fruitname"]); ?></p>
-    ?>
+```php
+<?php
+<p><?php print($GLOBALS["query"]["fruitname"]); ?></p>
+?>
+```
 
 If we address the page with: `http://localhost/index.php/fruitname/apples` we
 should see:
@@ -367,14 +395,16 @@ Another use case is implementing internationalised web applications. By creating
 a page that is an instance of a `LocalizedContentPage` we can easily support
 the same page in multiple languages:
 
-    /* Pages */
-    new LocalizedContentPage(array(
-        "nl" => new StaticContentPage("Nederlands", new Contents("nl.inc.php")),
-        "en-us" => new StaticContentPage("American", new Contents("en-us.inc.php")),
-        "en-gb" => new StaticContentPage("British", new Contents("en-gb.inc.php")),
-        "fr" => new StaticContentPage("Français", new Contents("fr.inc.php")),
-        "de" => new StaticContentPage("Deutsch", new Contents("de.inc.php"))
-    ))
+```php
+/* Pages */
+new LocalizedContentPage(array(
+    "nl" => new StaticContentPage("Nederlands", new Contents("nl.inc.php")),
+    "en-us" => new StaticContentPage("American", new Contents("en-us.inc.php")),
+    "en-gb" => new StaticContentPage("British", new Contents("en-gb.inc.php")),
+    "fr" => new StaticContentPage("Français", new Contents("fr.inc.php")),
+    "de" => new StaticContentPage("Deutsch", new Contents("de.inc.php"))
+))
+```
 
 The above code fragment defines a page with translations into Dutch, American,
 British, French and German.
