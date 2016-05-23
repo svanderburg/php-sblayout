@@ -98,16 +98,14 @@ After creating the model and view, we must implement the code for the static
 sections and sub pages. The above model expects to have a directory structure
 that looks as follows:
 
-```php
-styles/
-  default.css
-sections/
-  header.inc.php
-  footer.inc.php
-contents/
-  fruit.inc.php
-index.php
-```
+    styles/
+      default.css
+    sections/
+      header.inc.php
+      footer.inc.php
+    contents/
+      fruit.inc.php
+    index.php
 
 The files to which the `StaticSection` objects refer should reside in
 `sections/`, stylesheets should reside in `styles/` and the contents of every sub
