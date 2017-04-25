@@ -23,7 +23,7 @@ class DynamicContentPage extends ContentPage
 	 */
 	public function __construct($title, $param, Contents $contents, Page $dynamicSubPage)
 	{
-		parent::__construct($title, $contents, null);
+		parent::__construct($title, $contents);
 		$this->param = $param;
 		$this->dynamicSubPage = $dynamicSubPage;
 	}

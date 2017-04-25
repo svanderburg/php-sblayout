@@ -10,7 +10,7 @@ require_once("menusection.inc.php");
  */
 function displaySection(Application $application, $id, ContentPage $currentPage)
 {
-	$section = $application->sections[$id];		
+	$section = $application->sections[$id];
 	
 	?>
 	<div id="<?php print($id); ?>">
@@ -27,10 +27,10 @@ function displaySection(Application $application, $id, ContentPage $currentPage)
 		{
 			if($section->displayTitle)
 			{
-				?>			
+				?>
 				<h1><?php print($currentPage->title); ?></h1>
 				<?php
-			}				
+			}
 			
 			if(array_key_exists($id, $currentPage->contents->sections))
 			{

@@ -342,7 +342,7 @@ Using path components as parameters
 -----------------------------------
 Instead of using the path components in a URL to address sub pages, we may also
 want to use path components as parameters instead. To use path components as
-parameters, we can use objects that are instance of `DynamicContentPage`:
+parameters, we can use objects that are instances of `DynamicContentPage`:
 
 ```php
 require_once("layout/model/page/DynamicContentPage.class.php");

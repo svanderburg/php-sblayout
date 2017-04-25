@@ -48,7 +48,7 @@ $application = new Application(
 			"page12" => new StaticContentPage("Subpage 1.2", new Contents("page1/subpage12.inc.php")),
 			"page13" => new StaticContentPage("Subpage 1.3", new Contents("page1/subpage13.inc.php")))),
 			
-    	"page2" => new StaticContentPage("Page 2", new Contents("page2.inc.php"), array(
+		"page2" => new StaticContentPage("Page 2", new Contents("page2.inc.php"), array(
 			"page21" => new StaticContentPage("Subpage 2.1", new Contents("page2/subpage21.inc.php")),
 			"page22" => new StaticContentPage("Subpage 2.2", new Contents("page2/subpage22.inc.php")),
 			"page23" => new StaticContentPage("Subpage 2.3", new Contents("page2/subpage23.inc.php")))),

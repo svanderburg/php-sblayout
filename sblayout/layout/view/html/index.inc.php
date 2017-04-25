@@ -38,7 +38,7 @@ function displayDoctype($doctype)
  * 
  * @param Application $application Encoding of the web application layout and pages
  */
-function displayRequestedPage(Application $application, $doctype = "html4strict")
+function displayRequestedPage(Application $application, $doctype = "html4")
 {
 	/* Set baseURL globally so that others can use it for convenience */
 	setBaseURL();
