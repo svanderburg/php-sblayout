@@ -1,5 +1,6 @@
 <?php
 require_once("menusection.inc.php");
+require_once("util/composecontentpath.inc.php");
 
 /**
  * Displays a section.
@@ -17,7 +18,7 @@ function displaySection(Application $application, $id, ContentPage $currentPage)
 		<?php
 		if($section instanceof StaticSection)
 		{
-			require("sections/".$section->contents);
+			require(composeContentPath("sections", $section->contents));
 		}
 		else if($section instanceof MenuSection)
 		{
@@ -34,7 +35,7 @@ function displaySection(Application $application, $id, ContentPage $currentPage)
 			
 			if(array_key_exists($id, $currentPage->contents->sections))
 			{
-				require($id."/".$currentPage->contents->sections[$id]);
+				require(composeContentPath($id, $currentPage->contents->sections[$id]));
 			}
 		}
 		?>
