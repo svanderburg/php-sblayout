@@ -432,6 +432,10 @@ There are also facilities to include application wide and per-page stylesheets
 and script includes. We can also make pages invisible from menu sections by
 instantiating pages that are prefixed with `Hidden*`.
 
+Moreover, there are two utility functions: the `Page::computeBaseURL()` model
+function and the `setBaseURL()` view function to determine the base directory in
+which the index script resides.
+
 Consult the API documentation for more information.
 
 Examples
@@ -439,9 +443,12 @@ Examples
 This package includes three example web applications that can be found in the
 `examples/` folder:
 
-* The `simple` web application demonstrates simple sub pages, inaccessible sub pages, dynamic sub pages and a page handling POST requests
-* The `i18n` web application demonstrates an internationalised web page displaying the same page in multiple languages
-* The `advanced` web applications demonstraties more advanced sub pages with multiple content sections. It also demonstrates style and script variability.
+* The `simple` web application demonstrates simple sub pages, inaccessible sub
+  pages, dynamic sub pages and a page handling POST requests
+* The `i18n` web application demonstrates an internationalised web page
+  displaying the same page in multiple languages
+* The `advanced` web applications demonstraties more advanced sub pages with
+  multiple content sections. It also demonstrates style and script variability.
 
 API documentation
 =================

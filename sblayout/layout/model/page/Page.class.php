@@ -38,5 +38,19 @@ abstract class Page
 	 * @return Page The requested sub page
 	 */
 	public abstract function lookupSubPage(Page $entryPage, array $ids, $index = 0);
+
+	/**
+	 * Computes the base URL from the script name.
+	 *
+	 * @return The dir name of the base URL or an empty string if it is the root.
+	 */
+	public static function computeBaseURL()
+	{
+		$baseURL = dirname($_SERVER["SCRIPT_NAME"]);
+		if($baseURL == "/")
+			$baseURL = "";
+
+		return $baseURL;
+	}
 }
 ?>

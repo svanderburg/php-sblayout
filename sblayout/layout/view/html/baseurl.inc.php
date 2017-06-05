@@ -4,9 +4,6 @@
  */
 function setBaseURL()
 {
-	global $baseURL;
-	$baseURL = dirname($_SERVER["SCRIPT_NAME"]);
-	if($baseURL == "/")
-		$baseURL = "";
+	$GLOBALS["baseURL"] = Page::computeBaseURL();
 }
 ?>
