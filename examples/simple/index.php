@@ -60,7 +60,10 @@ $application = new Application(
 		))),
 		
 		"external" => new ExternalPage("External", "http://www.google.com")
-	))
+	)),
+
+	/* Favorite icon */
+	"favicon.ico"
 );
 
 displayRequestedPage($application);

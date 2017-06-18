@@ -54,7 +54,10 @@ $application = new Application(
 			"fr" => new HiddenStaticContentPage("Interdit", new Contents("error/403/fr.inc.php")),
 			"de" => new HiddenStaticContentPage("Verboten", new Contents("error/403/de.inc.php")),
 		))
-	))
+	)),
+
+	/* Favorite icon */
+	"favicon.ico"
 );
 
 displayRequestedPage($application);

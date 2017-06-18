@@ -33,6 +33,16 @@ function displayDoctype($doctype)
 	}
 }
 
+function determineFavIconPath($icon)
+{
+	global $baseURL;
+	
+	if(substr($icon, 0, 1) == "/")
+		return $icon;
+	else
+		return $baseURL."/".$icon;
+}
+
 /**
  * Displays a simple HTML page containing the sections defined in the application layout.
  * 
@@ -57,6 +67,12 @@ function displayRequestedPage(Application $application, $doctype = "html4")
 		<title><?php print($currentPage->title); ?> - <?php print($application->title); ?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=<?php print($application->charset); ?>">
 		<?php
+		if($application->icon !== NULL)
+		{
+			?>
+			<link rel="shortcut icon" href="<?php print(determineFavIconPath($application->icon)); ?>">
+			<?php
+		}
 		generateScriptSection($application, $currentPage);
 		generateStyleSection($application, $currentPage);
 		?>

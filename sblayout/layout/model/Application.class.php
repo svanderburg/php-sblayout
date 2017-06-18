@@ -22,6 +22,9 @@ class Application
 	/** Contains the path id components derived from the URL */
 	public $menuPathIds;
 	
+	/** The favorite icon the page should use */
+	public $icon;
+	
 	/** An array of JavaScript files included by all pages */
 	public $scripts;
 	
@@ -35,15 +38,17 @@ class Application
 	 * @param array $styles An array of CSS stylesheets used for all pages
 	 * @param array $sections An array of sections of which the page is composed
 	 * @param Page $entryPage The entry page of the application
+	 * @param string $icon The favorite icon the page should use
 	 * @param array $scripts An array of JavaScript files included by all pages
 	 * @param string $charset The character encoding standard that the page should use (defaults to UTF-8)
 	 */
-	public function __construct($title, array $styles, array $sections, Page $entryPage, array $scripts = NULL, $charset = "UTF-8")
+	public function __construct($title, array $styles, array $sections, Page $entryPage, $icon = NULL, array $scripts = NULL, $charset = "UTF-8")
 	{
 		$this->title = $title;
 		$this->styles = $styles;
 		$this->sections = $sections;
 		$this->entryPage = $entryPage;
+		$this->icon = $icon;
 		$this->scripts = $scripts;
 		$this->charset = $charset;
 	}

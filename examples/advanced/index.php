@@ -92,6 +92,9 @@ $application = new Application(
 		))
 	)),
 
+	/* Favorite icon */
+	"favicon.ico",
+
 	/* Scripts */
 	array("hello.js")
 );
