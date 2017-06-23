@@ -28,10 +28,10 @@ class StaticContentPage extends ContentPage
 	/**
 	 * @see Page::lookupSubPage()
 	 */
-	public function lookupSubPage(Page $entryPage, array $ids, $index = 0)
+	public function lookupSubPage(Application $application, array $ids, $index = 0)
 	{
 		if(count($ids) == $index)
-			return parent::lookupSubPage($entryPage, $ids, $index);
+			return parent::lookupSubPage($application, $ids, $index);
 		else
 		{
 			$currentId = $ids[$index]; // Take the first id of the array
@@ -39,8 +39,7 @@ class StaticContentPage extends ContentPage
 			if(array_key_exists($currentId, $this->subPages))
 			{
 				$currentSubPage = $this->subPages[$currentId];
-				return $currentSubPage->lookupSubPage($entryPage, $ids, $index + 1);
-				
+				return $currentSubPage->lookupSubPage($application, $ids, $index + 1);
 			}
 			else
 				throw new PageNotFoundException(); // If the key does not exists, the sub page does not either

@@ -24,7 +24,7 @@ class LocalizedContentPage extends StaticContentPage
 	/**
 	 * @see Page::lookupSubPage()
 	 */
-	public function lookupSubPage(Page $entryPage, array $ids, $index = 0)
+	public function lookupSubPage(Application $application, array $ids, $index = 0)
 	{
 		if(count($ids) == $index)
 		{
@@ -54,7 +54,7 @@ class LocalizedContentPage extends StaticContentPage
 				if(array_key_exists($identifier, $this->subPages))
 				{
 					$result = $this->subPages[$identifier];
-					return $result->lookupSubPage($entryPage, $ids, $index);
+					return $result->lookupSubPage($application, $ids, $index);
 				}
 				else
 				{
@@ -68,7 +68,7 @@ class LocalizedContentPage extends StaticContentPage
 						if(array_key_exists($language, $this->subPages))
 						{
 							$result = $this->subPages[$language];
-							return $result->lookupSubPage($entryPage, $ids, $index);
+							return $result->lookupSubPage($application, $ids, $index);
 						}
 					}
 				}
@@ -77,10 +77,10 @@ class LocalizedContentPage extends StaticContentPage
 			/* If all locales have been tried and still none has been found, return the first sub page that is considered the default */
 			
 			$result = reset($this->subPages);
-			return $result->lookupSubPage($entryPage, $ids, $index);
+			return $result->lookupSubPage($application, $ids, $index);
 		}
 		else
-			return parent::lookupSubPage($entryPage, $ids, $index);
+			return parent::lookupSubPage($application, $ids, $index);
 	}
 }
 ?>

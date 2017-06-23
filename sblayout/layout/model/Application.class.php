@@ -61,7 +61,7 @@ class Application
 	public function lookup403Page()
 	{
 		$this->menuPathIds = array("403");
-		return $this->entryPage->lookupSubPage($this->entryPage, $this->menuPathIds);
+		return $this->entryPage->lookupSubPage($this, $this->menuPathIds);
 	}
 	
 	/**
@@ -72,7 +72,22 @@ class Application
 	public function lookup404Page()
 	{
 		$this->menuPathIds = array("404");
-		return $this->entryPage->lookupSubPage($this->entryPage, $this->menuPathIds);
+		return $this->entryPage->lookupSubPage($this, $this->menuPathIds);
+	}
+	
+	/**
+	 * Looks up the the requested page in the page hierarchy.
+	 *
+	 * @param array $menuPathIds An array of strings representing the keys of the page for each level
+	 * @throws PageNotFoundException If the page cannot be found
+	 * @throws PageForbiddenException If access to the page is restricted
+	 * @return Page The page which is currently requested
+	 */
+	public function lookupSubPage(array $menuPathIds)
+	{
+		$this->menuPathIds = $menuPathIds;
+		/* Lookup the requested sub page */
+		return $this->entryPage->lookupSubPage($this, $this->menuPathIds);
 	}
 	
 	/**
@@ -80,17 +95,16 @@ class Application
 	 * 
 	 * @throws PageNotFoundException If the page cannot be found
 	 * @throws PageForbiddenException If access to the page is restricted
-	 * @return Page The page which is currently requested 
+	 * @return Page The page which is currently requested
 	 */
 	public function lookupCurrentPage()
 	{
 		if(!array_key_exists("PATH_INFO", $_SERVER) || $_SERVER["PATH_INFO"] == "")
-			$this->menuPathIds = array(); // If no menu path is given take an empty array
+			$menuPathIds = array(); // If no menu path is given take an empty array
 		else
-			$this->menuPathIds = explode("/", substr($_SERVER["PATH_INFO"], 1)); // Split everything between '/' characters and turn it into an array
+			$menuPathIds = explode("/", substr($_SERVER["PATH_INFO"], 1)); // Split everything between '/' characters and turn it into an array
 		
-		/* Lookup the requested sub page */
-		return $this->entryPage->lookupSubPage($this->entryPage, $this->menuPathIds);
+		return $this->lookupSubPage($menuPathIds);
 	}
 }
 ?>

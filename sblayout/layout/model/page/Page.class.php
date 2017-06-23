@@ -1,4 +1,6 @@
 <?php
+require_once(dirname(__FILE__)."/../Application.class.php");
+
 /**
  * Defines a page that can be reached from a link in a menu section or through
  * the last path components of an URL.
@@ -20,11 +22,15 @@ abstract class Page
 	
 	/**
 	 * Checks whether the page link should be displayed in a menu section.
+	 *
+	 * @return bool TRUE if the page is visible, else FALSE
 	 */
 	public abstract function checkVisibility();
 	
 	/**
 	 * Checks whether the page is currently accessible.
+	 *
+	 * @return bool TRUE if the user has access, else FALSE
 	 */
 	public abstract function checkAccessibility();
 	
@@ -32,12 +38,12 @@ abstract class Page
 	 * Lookup a sub page by using the given ids orginating from the last path components
 	 * of an URL.
 	 * 
-	 * @param Page $entryPage The entry page of the application
+	 * @param Application $application Application layout where the page belongs to
 	 * @param array $ids An array of strings containing URL path components
 	 * @param int $index The current index of the element in the ids array
 	 * @return Page The requested sub page
 	 */
-	public abstract function lookupSubPage(Page $entryPage, array $ids, $index = 0);
+	public abstract function lookupSubPage(Application $application, array $ids, $index = 0);
 
 	/**
 	 * Computes the base URL from the script name.

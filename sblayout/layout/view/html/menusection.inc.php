@@ -18,15 +18,15 @@ function displayMenuSection(Application $application, MenuSection $section)
 			$currentId = $application->menuPathIds[$i];
 			$subPath = $subPath.$currentId."/";
 			
-			if($page instanceof StaticContentPage)
+			if($page instanceof StaticContentPage || $page instanceof PageAlias)
 				$page = $page->subPages[$currentId];
 			else
 				break;
 		}
 		
 		// Display links to the sub pages
-
-		if($page instanceof StaticContentPage && $page->subPages !== NULL)
+		
+		if(($page instanceof StaticContentPage || $page instanceof PageAlias) && $page->subPages !== NULL)
 		{
 			foreach($page->subPages as $id => $subPage)
 			{

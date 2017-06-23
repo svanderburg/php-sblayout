@@ -40,7 +40,7 @@ class ExternalPage extends Page
 	/**
 	 * @see Page::lookupSubPage()
 	 */
-	public function lookupSubPage(Page $entryPage, array $ids, $index = 0)
+	public function lookupSubPage(Application $application, array $ids, $index = 0)
 	{
 		if(count($ids) == $index)
 		{
