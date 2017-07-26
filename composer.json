@@ -1,0 +1,33 @@
+{
+  "name": "svanderburg/php-sblayout",
+  "description": "My custom website layout organiser framework for PHP",
+  "type": "library",
+  "license": "Apache-2.0",
+  "authors": [
+      {
+          "name": "Sander van der Burg",
+          "email": "svanderburg@gmail.com",
+          "homepage": "http://sandervanderburg.nl"
+      }
+  ],
+  "autoload": {
+      "psr-4": { "SBLayout\\": "src/SBLayout" },
+      "files": [
+          "src/SBLayout/View/HTML/page.php",
+          "src/SBLayout/View/HTML/menusection.php",
+          "src/SBLayout/View/HTML/Util/composecontentpath.php",
+          "src/SBLayout/View/HTML/styles.php",
+          "src/SBLayout/View/HTML/scripts.php",
+          "src/SBLayout/View/HTML/controller.php",
+          "src/SBLayout/View/HTML/index.php",
+          "src/SBLayout/View/HTML/baseurl.php",
+          "src/SBLayout/View/HTML/section.php"
+      ]
+  },
+  "autoload-dev": {
+      "psr-4": {
+          "SimpleExample\\": "examples/simple/includes",
+          "Examples\\I18N\\": "examples/i18n/includes"
+      }
+  }
+}

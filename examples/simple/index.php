@@ -1,21 +1,19 @@
 <?php
+require(dirname(__FILE__)."/../../vendor/autoload.php");
+
+use SBLayout\Model\Application;
+use SBLayout\Model\Page\DynamicContentPage;
+use SBLayout\Model\Page\ExternalPage;
+use SBLayout\Model\Page\HiddenStaticContentPage;
+use SBLayout\Model\Page\PageAlias;
+use SBLayout\Model\Page\StaticContentPage;
+use SBLayout\Model\Page\Content\Contents;
+use SBLayout\Model\Section\ContentsSection;
+use SBLayout\Model\Section\MenuSection;
+use SBLayout\Model\Section\StaticSection;
+use SimpleExample\Model\Page\InaccessibleContentPage;
+
 error_reporting(E_STRICT | E_ALL);
-
-set_include_path("../../sblayout");
-
-require_once("layout/model/Application.class.php");
-require_once("layout/model/section/StaticSection.class.php");
-require_once("layout/model/section/MenuSection.class.php");
-require_once("layout/model/section/ContentsSection.class.php");
-require_once("layout/model/page/StaticContentPage.class.php");
-require_once("layout/model/page/HiddenStaticContentPage.class.php");
-require_once("layout/model/page/DynamicContentPage.class.php");
-require_once("layout/model/page/ExternalPage.class.php");
-require_once("layout/model/page/PageAlias.class.php");
-
-require_once("includes/model/page/InaccessibleContentPage.class.php");
-
-require_once("layout/view/html/index.inc.php");
 
 $application = new Application(
 	/* Title */
@@ -66,5 +64,5 @@ $application = new Application(
 	"favicon.ico"
 );
 
-displayRequestedPage($application);
+\SBLayout\View\HTML\displayRequestedPage($application);
 ?>

@@ -48,12 +48,11 @@ To create a very trivial web application displaying one page, we must first
 create an index page (`index.php`) composing a simple application model:
 
 ```php
-set_include_path("../sblayout");
-
-require_once("layout/model/Application.class.php");
-require_once("layout/model/section/StaticSection.class.php");
-require_once("layout/model/section/ContentsSection.class.php");
-require_once("layout/model/page/StaticContentPage.class.php");
+use SBLayout\Model\Application;
+use SBLayout\Model\Page\StaticContentPage;
+use SBLayout\Model\Page\Content\Contents;
+use SBLayout\Model\Section\ContentsSection;
+use SBLayout\Model\Section\StaticSection;
 
 $application = new Application(
     /* Title */
@@ -82,11 +81,11 @@ every page unique.
 Every sub page has `Trivial web application` in the title and use the style
 settings from the `default.css` stylesheet.
 
-We can display a sub page by appending the following lines to `index.php`:
+We can display a sub page by appending the following function invocation to
+`index.php`:
 
 ```php
-require_once("layout/view/html/index.inc.php");
-displayRequestedPage($application);
+\SBLayout\View\HTML\displayRequestedPage($application);
 ```
 
 The above code fragement composes an HTML page from the code snippets for each
@@ -128,15 +127,12 @@ new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
 
 By adding a menu section, we can automatically show a menu section on every page
 that displays links to their sub pages and marks the link that is currently
-selected as such. Do that we must add the following include to `index.php`:
+selected as such. We can change the sections parameter to include a menu
+section:
 
 ```php
-require_once("layout/model/section/MenuSection.class.php");
-```
+use SBLayout\Model\Section\MenuSection;
 
-and we can change the sections parameter to include a menu section:
-
-```php
 /* Sections */
 array(
     "header" => new StaticSection("header.inc.php"),
@@ -218,8 +214,8 @@ with keys `403` and `404`:
 ```php
 /* Pages */
 new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
-    "403" => new StaticContentPage("Forbidden", new Contents("error/403.inc.php")),
-    "404" => new StaticContentPage("Page not found", new Contents("error/404.inc.php"))
+    "403" => new HiddenStaticContentPage("Forbidden", new Contents("error/403.inc.php")),
+    "404" => new HiddenStaticContentPage("Page not found", new Contents("error/404.inc.php"))
     ...
 ))
 ```
@@ -235,7 +231,7 @@ For example, the following class implements a page displaying content that denie
 access to everyone:
 
 ```php
-require_once("layout/model/page/ContentPage.class.php");
+use SBLayout\Model\Page\ContentPage;
 
 class InaccessibleContentPage extends ContentPage
 {
@@ -345,7 +341,7 @@ want to use path components as parameters instead. To use path components as
 parameters, we can use objects that are instances of `DynamicContentPage`:
 
 ```php
-require_once("layout/model/page/DynamicContentPage.class.php");
+use SBLayout/Model/Page/DynamicContentPage;
 ```
 
 The following code fragments adds a sub page having a sub page that interprets
@@ -394,6 +390,8 @@ a page that is an instance of a `LocalizedContentPage` we can easily support
 the same page in multiple languages:
 
 ```php
+use SBLayout/Model/Page/LocalizedContentPage;
+
 /* Pages */
 new LocalizedContentPage(array(
     "nl" => new StaticContentPage("Nederlands", new Contents("nl.inc.php")),
