@@ -1,6 +1,8 @@
 <?php
 require(dirname(__FILE__)."/../../vendor/autoload.php");
 
+error_reporting(E_STRICT | E_ALL);
+
 use SBLayout\Model\Application;
 use SBLayout\Model\Page\DynamicContentPage;
 use SBLayout\Model\Page\ExternalPage;
@@ -11,9 +13,7 @@ use SBLayout\Model\Page\Content\Contents;
 use SBLayout\Model\Section\ContentsSection;
 use SBLayout\Model\Section\MenuSection;
 use SBLayout\Model\Section\StaticSection;
-use SimpleExample\Model\Page\InaccessibleContentPage;
-
-error_reporting(E_STRICT | E_ALL);
+use Examples\Simple\Model\Page\InaccessibleContentPage;
 
 $application = new Application(
 	/* Title */

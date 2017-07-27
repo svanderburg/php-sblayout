@@ -26,7 +26,7 @@
   },
   "autoload-dev": {
       "psr-4": {
-          "SimpleExample\\": "examples/simple/includes",
+          "Examples\\Simple\\": "examples/simple/includes",
           "Examples\\I18N\\": "examples/i18n/includes"
       }
   }

@@ -1,5 +1,5 @@
 <?php
-namespace SimpleExample\Model\Page;
+namespace Examples\Simple\Model\Page;
 use SBLayout\Model\Page\ContentPage;
 
 class InaccessibleContentPage extends ContentPage
