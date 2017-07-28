@@ -31,8 +31,7 @@ as the _model_ of the application -- it captures common properties such as the
 sections, style settings, and all the sub pages of the application.
 
 An application model can be displayed by invoking a _view_ function. This package
-contains a trivial implementation named: `displayRequestedPage()` that is defined
-in the `layout/view/html/index.inc.php` file.
+contains a trivial implementation named: `displayRequestedPage()`.
 
 Finally, we always use one single PHP page (invoking the view function) that
 handles all requests to every sub page. The path components that are appended to
@@ -63,13 +62,13 @@ $application = new Application(
     
     /* Sections */
     array(
-        "header" => new StaticSection("header.inc.php"),
+        "header" => new StaticSection("header.php"),
         "contents" => new ContentsSection(true),
-        "footer" => new StaticSection("footer.inc.php")
+        "footer" => new StaticSection("footer.php")
     ),
     
     /* Pages */
-    new StaticContentPage("Fruit", new Contents("fruit.inc.php"))
+    new StaticContentPage("Fruit", new Contents("fruit.php"))
 );
 ```
 
@@ -100,10 +99,10 @@ that looks as follows:
     styles/
       default.css
     sections/
-      header.inc.php
-      footer.inc.php
+      header.php
+      footer.php
     contents/
-      fruit.inc.php
+      fruit.php
     index.php
 
 The files to which the `StaticSection` objects refer should reside in
@@ -118,10 +117,10 @@ a sub page displaying a specific kind of fruit:
 
 ```php
 /* Pages */
-new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
-    "apples" => new StaticContentPage("Apples", new Contents("fruit/apples.inc.php")),
-    "pears" => new StaticContentPage("Pears", new Contents("fruit/pears.inc.php")),
-    "oranges" => new StaticContentPage("Oranges", new Contents("fruit/oranges.inc.php"))
+new StaticContentPage("Fruit", new Contents("fruit.php"), array(
+    "apples" => new StaticContentPage("Apples", new Contents("fruit/apples.php")),
+    "pears" => new StaticContentPage("Pears", new Contents("fruit/pears.php")),
+    "oranges" => new StaticContentPage("Oranges", new Contents("fruit/oranges.php"))
 ))
 ```
 
@@ -135,10 +134,10 @@ use SBLayout\Model\Section\MenuSection;
 
 /* Sections */
 array(
-    "header" => new StaticSection("header.inc.php"),
+    "header" => new StaticSection("header.php"),
     "menu" => new MenuSection(0),
     "contents" => new ContentsSection(true),
-    "footer" => new StaticSection("footer.inc.php")
+    "footer" => new StaticSection("footer.php")
 ),
 ```
 
@@ -147,9 +146,9 @@ sub page:
 
     contents/
       fruit/
-        apples.inc.php
-        pears.inc.php
-        oranges.inc.php
+        apples.php
+        pears.php
+        oranges.php
 
 After making these modifications, each page shows a menu section that displays
 the fruit kinds. Clicking on a link will redirect us to the page displaying it.
@@ -167,26 +166,26 @@ the available sub sub pages per sub page:
 ```php
 /* Sections */
 array(
-    "header" => new StaticSection("header.inc.php"),
+    "header" => new StaticSection("header.php"),
     "menu" => new MenuSection(0),
     "submenu" => new MenuSection(1),
     "contents" => new ContentsSection(true),
-    "footer" => new StaticSection("footer.inc.php")
+    "footer" => new StaticSection("footer.php")
 ),
 
 /* Pages */
-new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
-    "apples" => new StaticContentPage("Apples", new Contents("fruit/apples.inc.php"), array(
-        "red" => new StaticContentPage("Red", new Contents("fruit/apples/red.inc.php")),
-        "green" => new StaticContentPage("Red", new Contents("fruit/apples/green.inc.php"))
+new StaticContentPage("Fruit", new Contents("fruit.php"), array(
+    "apples" => new StaticContentPage("Apples", new Contents("fruit/apples.php"), array(
+        "red" => new StaticContentPage("Red", new Contents("fruit/apples/red.php")),
+        "green" => new StaticContentPage("Red", new Contents("fruit/apples/green.php"))
     )),
-    "pears" => new StaticContentPage("Pears", new Contents("fruit/pears.inc.php"), array(
-        "yellow" => new StaticContentPage("Yellow", new Contents("fruit/pears/yellow.inc.php")),
-        "green" => new StaticContentPage("Green", new Contents("fruit/pears/green.inc.php"))
+    "pears" => new StaticContentPage("Pears", new Contents("fruit/pears.php"), array(
+        "yellow" => new StaticContentPage("Yellow", new Contents("fruit/pears/yellow.php")),
+        "green" => new StaticContentPage("Green", new Contents("fruit/pears/green.php"))
     )),
-    "oranges" => new StaticContentPage("Oranges", new Contents("fruit/oranges.inc.php"), array(
-        "orange" => new StaticContentPage("Orange", new Contents("fruit/oranges/orange.inc.php")),
-        "yellow" => new StaticContentPage("Yellow", new Contents("fruit/oranges/yellow.inc.php"))
+    "oranges" => new StaticContentPage("Oranges", new Contents("fruit/oranges.php"), array(
+        "orange" => new StaticContentPage("Orange", new Contents("fruit/oranges/orange.php")),
+        "yellow" => new StaticContentPage("Yellow", new Contents("fruit/oranges/yellow.php"))
     ))
 ))
 ```
@@ -213,9 +212,9 @@ with keys `403` and `404`:
 
 ```php
 /* Pages */
-new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
-    "403" => new HiddenStaticContentPage("Forbidden", new Contents("error/403.inc.php")),
-    "404" => new HiddenStaticContentPage("Page not found", new Contents("error/404.inc.php"))
+new StaticContentPage("Fruit", new Contents("fruit.php"), array(
+    "403" => new HiddenStaticContentPage("Forbidden", new Contents("error/403.php")),
+    "404" => new HiddenStaticContentPage("Page not found", new Contents("error/404.php"))
     ...
 ))
 ```
@@ -269,25 +268,25 @@ array(
     "header" => new ContentsSection(false),
     "menu" => new MenuSection(0),
     "contents" => new ContentsSection(true),
-    "footer" => new StaticSection("footer.inc.php")
+    "footer" => new StaticSection("footer.php")
 ),
 
 /* Pages */
 new StaticContentPage("Fruit", new Contents(array(
-    "header" => "fruit.inc.php",
-    "contents" => "fruit.inc.php"
+    "header" => "fruit.php",
+    "contents" => "fruit.php"
 )), array(
     "apples" => new StaticContentPage("Apples", new Contents(array(
-        "header" => "fruit/apples.inc.php",
-        "contents" => "fruit/apples.inc.php"
+        "header" => "fruit/apples.php",
+        "contents" => "fruit/apples.php"
     ))),
     "pears" => new StaticContentPage("Pears", new Contents(array(
-        "header" => "fruit/pears.inc.php",
-        "contents" => "fruit/pears.inc.php"
+        "header" => "fruit/pears.php",
+        "contents" => "fruit/pears.php"
     ))),
     "oranges" => new StaticContentPage("Oranges", new Contents(array(
-        "header" => "fruit/oranges.inc.php",
-        "contents" => "fruit/oranges.inc.php"
+        "header" => "fruit/oranges.php",
+        "contents" => "fruit/oranges.php"
     )))
 )
 ```
@@ -296,11 +295,11 @@ The above model also requires a few additional files that should reside in the
 `header` subdirectory:
 
     header/
-      fruit.inc.php
+      fruit.php
       fruit/
-        apples.inc.php
-        pears.inc.php
-        oranges.inc.php
+        apples.php
+        pears.php
+        oranges.php
 
 The above files should display the header for each fruit kind.
 
@@ -315,9 +314,9 @@ snippet that is processed before any HTML output is rendered:
 ```php
 /* Pages */
 
-new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
+new StaticContentPage("Fruit", new Contents("fruit.php"), array(
     ...
-    "question" => new StaticContentPage("Question", new Contents("question.inc.php", "question.inc.php")),
+    "question" => new StaticContentPage("Question", new Contents("question.php", "question.php")),
     ...
 )
 ```
@@ -332,7 +331,7 @@ care of processing the POST parameter. The file should reside in the following
 location on the filesystem:
 
     controller/
-      question.inc.php
+      question.php
 
 Using path components as parameters
 -----------------------------------
@@ -350,9 +349,9 @@ the a component:
 ```php
 /* Pages */
 
-new StaticContentPage("Fruit", new Contents("fruit.inc.php"), array(
+new StaticContentPage("Fruit", new Contents("fruit.php"), array(
     ...
-    "fruitname" => new DynamicContentPage("Display fruit name", "fruitname", new Contents("fruitname.inc.php"))
+    "fruitname" => new DynamicContentPage("Display fruit name", "fruitname", new Contents("fruitname.php"))
     ...
 )
 ```
@@ -362,7 +361,7 @@ the variable that will be set when the sub page is processed, and the third
 parameter configures the content sections that are supposed to interpret the
 variable.
 
-We can implement the `fruitname.inc.php` to simply display the parameter:
+We can implement the `fruitname.php` to simply display the parameter:
 
 ```php
 <?php
@@ -394,11 +393,11 @@ use SBLayout/Model/Page/LocalizedContentPage;
 
 /* Pages */
 new LocalizedContentPage(array(
-    "nl" => new StaticContentPage("Nederlands", new Contents("nl.inc.php")),
-    "en-us" => new StaticContentPage("American", new Contents("en-us.inc.php")),
-    "en-gb" => new StaticContentPage("British", new Contents("en-gb.inc.php")),
-    "fr" => new StaticContentPage("Français", new Contents("fr.inc.php")),
-    "de" => new StaticContentPage("Deutsch", new Contents("de.inc.php"))
+    "nl" => new StaticContentPage("Nederlands", new Contents("nl.php")),
+    "en-us" => new StaticContentPage("American", new Contents("en-us.php")),
+    "en-gb" => new StaticContentPage("British", new Contents("en-gb.php")),
+    "fr" => new StaticContentPage("Français", new Contents("fr.php")),
+    "de" => new StaticContentPage("Deutsch", new Contents("de.php"))
 ))
 ```
 

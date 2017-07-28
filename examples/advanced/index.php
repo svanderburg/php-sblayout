@@ -25,68 +25,68 @@ $application = new Application(
 		"menu" => new MenuSection(0),
 		"submenu" => new MenuSection(1),
 		"contents" => new ContentsSection(true),
-		"footer" => new StaticSection("footer.inc.php"),
+		"footer" => new StaticSection("footer.php"),
 	),
 
 	/* Pages */
 	new StaticContentPage("Home", new Contents(array(
-			"contents" => "home.inc.php",
-			"header" => "home.inc.php"
+			"contents" => "home.php",
+			"header" => "home.php"
 		)), array(
 		"403" => new HiddenStaticContentPage("Forbidden", new Contents(array(
-			"contents" => "error/403.inc.php",
-			"header" => "home.inc.php"
+			"contents" => "error/403.php",
+			"header" => "home.php"
 		))),
 		"404" => new HiddenStaticContentPage("Page not found", new Contents(array(
-			"contents" => "error/404.inc.php",
-			"header" => "home.inc.php"
+			"contents" => "error/404.php",
+			"header" => "home.php"
 		))),
 		
 		"home" => new PageAlias("Home", ""),
 
 		"styles" => new StaticContentPage("Styles", new Contents(array(
-			"contents" => "styles.inc.php",
-			"header" => "home.inc.php"
+			"contents" => "styles.php",
+			"header" => "home.php"
 		)), array(
 			"red" => new StaticContentPage("Red", new Contents(array(
-				"contents" => "styles/red.inc.php",
-				"header" => "home.inc.php"
+				"contents" => "styles/red.php",
+				"header" => "home.php"
 			), null, array("styles/red.css"))),
 			"blue" => new StaticContentPage("Blue", new Contents(array(
-				"contents" => "styles/blue.inc.php",
-				"header" => "home.inc.php"
+				"contents" => "styles/blue.php",
+				"header" => "home.php"
 			), null, array("styles/blue.css"))),
 			"green" => new StaticContentPage("Green", new Contents(array(
-				"contents" => "styles/green.inc.php",
-				"header" => "home.inc.php"
+				"contents" => "styles/green.php",
+				"header" => "home.php"
 			), null, array("styles/green.css")))
 		)),
 		
 		"scripts" => new StaticContentPage("Scripts", new Contents(array(
-			"contents" => "scripts.inc.php",
-			"header" => "home.inc.php"
+			"contents" => "scripts.php",
+			"header" => "home.php"
 		)), array(
 			"one" => new StaticContentPage("One", new Contents(array(
-				"contents" => "scripts/one.inc.php",
-				"header" => "home.inc.php"
+				"contents" => "scripts/one.php",
+				"header" => "home.php"
 			), null, null, array("scripts/one.js"))),
 			"two" => new StaticContentPage("Two", new Contents(array(
-				"contents" => "scripts/two.inc.php",
-				"header" => "home.inc.php"
+				"contents" => "scripts/two.php",
+				"header" => "home.php"
 			), null, null, array("scripts/two.js")))
 		)),
 		
 		"header" => new StaticContentPage("Header", new Contents(array(
-			"contents" => "header.inc.php",
-			"header" => "home.inc.php"
+			"contents" => "header.php",
+			"header" => "home.php"
 		)), array(
 			"first" => new StaticContentPage("First", new Contents(array(
-				"contents" => "header/first.inc.php",
-				"header" => "header/first.inc.php"
+				"contents" => "header/first.php",
+				"header" => "header/first.php"
 			))),
 			"second" => new StaticContentPage("Second", new Contents(array(
-				"contents" => "header/second.inc.php",
-				"header" => "header/second.inc.php"
+				"contents" => "header/second.php",
+				"header" => "header/second.php"
 			)))
 		))
 	)),
