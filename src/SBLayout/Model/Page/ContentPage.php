@@ -1,6 +1,8 @@
 <?php
 namespace SBLayout\Model\Page;
 use SBLayout\Model\Application;
+use SBLayout\Model\PageForbiddenException;
+use SBLayout\Model\PageNotFoundException;
 use SBLayout\Model\Page\Content\Contents;
 
 /**
