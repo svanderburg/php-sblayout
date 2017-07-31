@@ -37,7 +37,7 @@ class StaticContentPage extends ContentPage
 		{
 			$currentId = $ids[$index]; // Take the first id of the array
 			
-			if(array_key_exists($currentId, $this->subPages))
+			if($this->subPages !== null && array_key_exists($currentId, $this->subPages))
 			{
 				$currentSubPage = $this->subPages[$currentId];
 				return $currentSubPage->lookupSubPage($application, $ids, $index + 1);

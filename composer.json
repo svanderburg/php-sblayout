@@ -29,5 +29,8 @@
           "Examples\\Simple\\": "examples/simple/includes",
           "Examples\\I18N\\": "examples/i18n/includes"
       }
+  },
+  "require-dev": {
+      "phpunit/phpunit": "5.x"
   }
 }
