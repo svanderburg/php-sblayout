@@ -1,7 +1,7 @@
 <?php
 namespace SBLayout\Model\Page;
 use SBLayout\Model\Application;
-
+use SBLayout\Model\PageNotFoundException;
 /**
  * Defines a page alias that is an alias of an existing page that
  * can be reached from the entry page.
