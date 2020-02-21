@@ -377,7 +377,7 @@ want to use path components as parameters instead. To use path components as
 parameters, we can use objects that are instances of `DynamicContentPage`:
 
 ```php
-use SBLayout/Model/Page/DynamicContentPage;
+use SBLayout\Model\Page\DynamicContentPage;
 ```
 
 The following code fragments adds a sub page having a sub page that interprets
@@ -426,7 +426,7 @@ a page that is an instance of a `LocalizedContentPage` we can easily support
 the same page in multiple languages:
 
 ```php
-use SBLayout/Model/Page/LocalizedContentPage;
+use SBLayout\Model\Page\LocalizedContentPage;
 
 /* Pages */
 new LocalizedContentPage(array(
