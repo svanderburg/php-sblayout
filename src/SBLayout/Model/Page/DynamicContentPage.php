@@ -17,7 +17,7 @@ class DynamicContentPage extends ContentPage
 	
 	/**
 	 * Create a new DynamicContentPage instance.
-	 * 
+	 *
 	 * @param string $title Title of the page that is used as a label in a menu section
 	 * @param string $param The name of the query parameter that must be set when retrieving the sub page
 	 * @param Contents $contents A content object storing properties of the content sections of a page

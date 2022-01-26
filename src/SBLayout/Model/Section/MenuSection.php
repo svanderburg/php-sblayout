@@ -11,7 +11,7 @@ class MenuSection extends Section
 	
 	/**
 	 * Creates a new MenuSection instance.
-	 * 
+	 *
 	 * @param id $level The level in the page hierarchy from which menu links must be displayed
 	 */
 	public function __construct($level)

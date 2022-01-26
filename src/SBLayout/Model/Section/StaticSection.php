@@ -11,7 +11,7 @@ class StaticSection extends Section
 	
 	/**
 	 * Creates a new StaticSection instance.
-	 * 
+	 *
 	 * @param string $contents PHP file containing the actual contents of this section
 	 */
 	public function __construct($contents)

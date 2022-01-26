@@ -15,7 +15,7 @@ class ContentPage extends Page
 
 	/**
 	 * Creates a new ContentPage instance
-	 * 
+	 *
 	 * @param string $title Title of the page that is used as a label in a menu section
 	 * @param Contents $contents A content object storing properties of the content sections of a page
 	 */

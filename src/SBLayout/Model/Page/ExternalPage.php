@@ -12,7 +12,7 @@ class ExternalPage extends Page
 	
 	/**
 	 * Creates a new ExternalPage instance.
-	 * 
+	 *
 	 * @param string $title Title of the page that is used as a label in a menu section
 	 * @param string $url External URL to which the page redirects
 	 */

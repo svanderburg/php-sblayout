@@ -7,14 +7,14 @@ use SBLayout\Model\Application;
  * but in a different language. The localized page tries to detect the preferred language
  * from the Accept-Language parameter sent by the user agent and displays the page in that
  * language accordingly.
- * 
- * If the preferred languages are not supported, it will fallback to the first sub page. 
+ *
+ * If the preferred languages are not supported, it will fallback to the first sub page.
  */
 class LocalizedContentPage extends StaticContentPage
 {
 	/**
 	 * Creates a new LocalizedContentPage instance.
-	 * 
+	 *
 	 * @param array $subPages An associative array mapping language identifiers (i.e. language-country) to sub pages
 	 */
 	public function __construct(array $subPages = null)
@@ -75,7 +75,7 @@ class LocalizedContentPage extends StaticContentPage
 				}
 			}
 			
-			/* If all locales have been tried and still none has been found, return the first sub page that is considered the default */
+			/* If all locales have been tried and still none has been found, return the first sub page (that is considered the default) */
 			
 			$result = reset($this->subPages);
 			return $result->lookupSubPage($application, $ids, $index);

@@ -3,7 +3,7 @@ namespace SBLayout\Model\Page\Content;
 
 /**
  * Represents the contents that ends up in the dynamic content sections of a page.
- * 
+ *
  * The content is in most cases a single division containing HTML code, but it can also
  * be multiple divisions each having their own HTML fragments.
  */
@@ -23,7 +23,7 @@ class Contents
 	
 	/**
 	 * Creates a new contents instance.
-	 * 
+	 *
 	 * @param mixed $sections An associative array mapping division ids onto files representing HTML content or a string, which represents the contents of the contents division.
 	 * @param string $controller A string containing the path to the controller page that handles GET or POST parameters
 	 * @param array $styles An array containing stylesheet files to include when requesting this page 

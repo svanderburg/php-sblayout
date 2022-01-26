@@ -6,7 +6,7 @@ use SBLayout\Model\Page\Content\Contents;
 
 /**
  * Defines a page referring to a collection of sub pages whose links can be picked
- * from a menu section. 
+ * from a menu section.
  */
 class StaticContentPage extends ContentPage
 {
@@ -15,7 +15,7 @@ class StaticContentPage extends ContentPage
 	
 	/**
 	 * Creates a new ContentPage instance.
-	 * 
+	 *
 	 * @param string $title Title of the page that is used as a label in a menu section
 	 * @param Contents $contents A content object storing properties of the content sections of a page
 	 * @param array $subPages An associative array mapping ids to sub pages
