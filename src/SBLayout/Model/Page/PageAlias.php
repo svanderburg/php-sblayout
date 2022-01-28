@@ -1,6 +1,7 @@
 <?php
 namespace SBLayout\Model\Page;
 use SBLayout\Model\Application;
+use SBLayout\Model\Route;
 use SBLayout\Model\PageNotFoundException;
 
 /**
@@ -51,20 +52,24 @@ class PageAlias extends Page
 	}
 	
 	/**
-	 * @see Page::lookupSubPage()
+	 * @see Page::examineRoute()
 	 */
-	public function lookupSubPage(Application $application, array $ids, $index = 0)
+	public function examineRoute(Application $application, Route $route, $index = 0)
 	{
-		if(count($ids) == $index)
-			return $application->lookupSubPage($this->menuPathIds);
+		if($route->indexIsAtRequestedPage($index))
+		{
+			$route->reset($this->menuPathIds);
+			$application->examineRoute($route);
+		}
 		else
 		{
-			$currentId = $ids[$index]; // Take the first id of the array
+			$currentId = $route->getId($index); // Take the first id of the array
 
 			if(array_key_exists($currentId, $this->subPages))
 			{
+				$route->visitPage($this);
 				$currentSubPage = $this->subPages[$currentId];
-				return $currentSubPage->lookupSubPage($application, $ids, $index + 1);
+				$currentSubPage->examineRoute($application, $route, $index + 1);
 			}
 			else
 				throw new PageNotFoundException(); // If the key does not exists, the sub page does not either

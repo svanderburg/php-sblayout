@@ -1,6 +1,7 @@
 <?php
 namespace SBLayout\Model\Page;
 use SBLayout\Model\Application;
+use SBLayout\Model\Route;
 
 /**
  * A page that refers to an external URL instead of a sub page belonging to the same application.
@@ -39,14 +40,14 @@ class ExternalPage extends Page
 	}
 	
 	/**
-	 * @see Page::lookupSubPage()
+	 * @see Page::examineRoute()
 	 */
-	public function lookupSubPage(Application $application, array $ids, $index = 0)
+	public function examineRoute(Application $application, Route $route, $index = 0)
 	{
-		if(count($ids) == $index)
+		if($route->indexIsAtRequestedPage($index))
 		{
 			if($this->checkAccessibility())
-				return $this;
+				$route->visitPage($this);
 			else
 				throw new PageForbiddenException();
 		}

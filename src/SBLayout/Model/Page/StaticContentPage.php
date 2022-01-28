@@ -1,6 +1,7 @@
 <?php
 namespace SBLayout\Model\Page;
 use SBLayout\Model\Application;
+use SBLayout\Model\Route;
 use SBLayout\Model\PageNotFoundException;
 use SBLayout\Model\Page\Content\Contents;
 
@@ -12,7 +13,7 @@ class StaticContentPage extends ContentPage
 {
 	/** An associative array mapping URL path components to sub pages */
 	public $subPages;
-	
+
 	/**
 	 * Creates a new ContentPage instance.
 	 *
@@ -25,22 +26,23 @@ class StaticContentPage extends ContentPage
 		parent::__construct($title, $contents);
 		$this->subPages = $subPages;
 	}
-	
+
 	/**
-	 * @see Page::lookupSubPage()
+	 * @see Page::examineRoute()
 	 */
-	public function lookupSubPage(Application $application, array $ids, $index = 0)
+	public function examineRoute(Application $application, Route $route, $index = 0)
 	{
-		if(count($ids) == $index)
-			return parent::lookupSubPage($application, $ids, $index);
+		if($route->indexIsAtRequestedPage($index))
+			parent::examineRoute($application, $route, $index);
 		else
 		{
-			$currentId = $ids[$index]; // Take the first id of the array
+			$currentId = $route->getId($index);
 			
 			if($this->subPages !== null && array_key_exists($currentId, $this->subPages))
 			{
 				$currentSubPage = $this->subPages[$currentId];
-				return $currentSubPage->lookupSubPage($application, $ids, $index + 1);
+				$route->visitPage($this);
+				$currentSubPage->examineRoute($application, $route, $index + 1);
 			}
 			else
 				throw new PageNotFoundException(); // If the key does not exists, the sub page does not either

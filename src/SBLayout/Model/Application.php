@@ -1,5 +1,6 @@
 <?php
 namespace SBLayout\Model;
+use SBLayout\Model\Route;
 use SBLayout\Model\Page\Page;
 
 /**
@@ -19,9 +20,6 @@ class Application
 	
 	/** The entry page of the application (which itself may refer to other sub pages) */
 	public $entryPage;
-
-	/** Contains the path id components derived from the URL */
-	public $menuPathIds;
 	
 	/** The favorite icon the page should use */
 	public $icon;
@@ -55,57 +53,58 @@ class Application
 	}
 	
 	/**
-	 * Lookups the 403 error page and changes the internal id components to refer to it.
-	 * 
-	 * @return Page The 403 error page
+	 * Derives the route to the 403 error page.
+	 *
+	 * @return Route The 403 error page route
 	 */
-	public function lookup403Page()
+	public function determine403Route()
 	{
-		$this->menuPathIds = array("403");
-		return $this->entryPage->lookupSubPage($this, $this->menuPathIds);
+		$route = new Route(array("403"));
+		$this->entryPage->examineRoute($this, $route);
+		return $route;
 	}
 	
 	/**
-	 * Lookups the 404 error page and changes the internal id components to refer to it.
+	 * Derives the route to the 403 error page.
 	 *
-	 * @return Page The 404 error page
+	 * @return Route The 404 error page route
 	 */
-	public function lookup404Page()
+	public function determine404Route()
 	{
-		$this->menuPathIds = array("404");
-		return $this->entryPage->lookupSubPage($this, $this->menuPathIds);
+		$route = new Route(array("404"));
+		$this->entryPage->examineRoute($this, $route);
+		return $route;
 	}
 	
 	/**
-	 * Looks up the the requested page in the page hierarchy.
+	 * Examines a route derived from the path components of the requested URL and records all pages visited.
 	 *
-	 * @param array $menuPathIds An array of strings representing the keys of the page for each level
+	 * @param Route route Route to investigate
 	 * @throws PageNotFoundException If the page cannot be found
 	 * @throws PageForbiddenException If access to the page is restricted
-	 * @return Page The page which is currently requested
 	 */
-	public function lookupSubPage(array $menuPathIds)
+	public function examineRoute(Route $route)
 	{
-		$this->menuPathIds = $menuPathIds;
-		/* Lookup the requested sub page */
-		return $this->entryPage->lookupSubPage($this, $this->menuPathIds);
+		$this->entryPage->examineRoute($this, $route);
 	}
 	
 	/**
 	 * Looks up the currently requested page to be displayed, by looking at the structure of the current URL
-	 * 
+	 *
 	 * @throws PageNotFoundException If the page cannot be found
 	 * @throws PageForbiddenException If access to the page is restricted
-	 * @return Page The page which is currently requested
+	 * @return Route A route that records all visited pages
 	 */
-	public function lookupCurrentPage()
+	public function determineRoute()
 	{
 		if(!array_key_exists("PATH_INFO", $_SERVER) || $_SERVER["PATH_INFO"] == "")
 			$menuPathIds = array(); // If no menu path is given take an empty array
 		else
 			$menuPathIds = explode("/", substr($_SERVER["PATH_INFO"], 1)); // Split everything between '/' characters and turn it into an array
-		
-		return $this->lookupSubPage($menuPathIds);
+
+		$route = new Route($menuPathIds);
+		$this->examineRoute($route);
+		return $route;
 	}
 }
 ?>

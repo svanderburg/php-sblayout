@@ -1,6 +1,7 @@
 <?php
 namespace SBLayout\Model\Page;
 use SBLayout\Model\Application;
+use SBLayout\Model\Route;
 
 /**
  * Defines a static content page referring to sub pages that each implement the same page,
@@ -22,66 +23,78 @@ class LocalizedContentPage extends StaticContentPage
 		parent::__construct(reset($subPages)->title, reset($subPages)->contents, $subPages);
 	}
 	
-	/**
-	 * @see Page::lookupSubPage()
-	 */
-	public function lookupSubPage(Application $application, array $ids, $index = 0)
+	private function parseLocaleOptions($acceptLanguage)
 	{
-		if(count($ids) == $index)
+		$options = array(); // Stores the preference array
+		$locales = explode(",", $acceptLanguage);
+
+		/* Parse the locales to separate the identifiers and weights */
+		foreach($locales as $locale)
 		{
-			$options = array(); // Stores the preference array
-			$locales = explode(",", $_SERVER["HTTP_ACCEPT_LANGUAGE"]);
-				
-			/* Parse the locales to separate the identifiers and weights */
-			foreach($locales as $locale)
+			$localeComponents = explode(";", $locale);
+
+			$identifier = strtolower($localeComponents[0]);
+
+			if(count($localeComponents) > 1)
+				$weight = substr($localeComponents[1], 2);
+			else
+				$weight = 1.0; // if a q value is not given, assume 1.0
+
+			$options[$identifier] = $weight;
+		}
+
+		arsort($options, SORT_NUMERIC); // Sort on priority
+
+		return $options;
+	}
+	
+	private function findLocalizedSubPage(array $options)
+	{
+		foreach($options as $identifier => $weight)
+		{
+			// Check if there is a locale option that matches the requested locale
+			if(array_key_exists($identifier, $this->subPages))
+				return $this->subPages[$identifier];
+			else
 			{
-				$localeComponents = explode(";", $locale);
-			
-				$identifier = $localeComponents[0];
-			
-				if(count($localeComponents) > 1)
-					$weight = substr($localeComponents[1], 2);
-				else
-					$weight = 1.0; // if a q value is not given, assume 1.0
-			
-				$options[$identifier] = $weight;
-			}
+				$identifierComponents = explode("-", $identifier);
 				
-			arsort($options, SORT_NUMERIC); // Sort on priority
-				
-			/* Try to lookup the locale with the highest priority that is defined as sub item */
-			foreach($options as $identifier => $weight)
-			{
-				if(array_key_exists($identifier, $this->subPages))
+				if(count($identifierComponents) > 1)
 				{
-					$result = $this->subPages[$identifier];
-					return $result->lookupSubPage($application, $ids, $index);
-				}
-				else
-				{
-					$identifierComponents = explode("-", $identifier);
+					// Try the locale's language without country as a fallback
+					$language = $identifierComponents[0];
 					
-					if(count($identifierComponents) > 1)
-					{
-						// Try the locale's language without country as a fallback
-						$language = $identifierComponents[0];
-						
-						if(array_key_exists($language, $this->subPages))
-						{
-							$result = $this->subPages[$language];
-							return $result->lookupSubPage($application, $ids, $index);
-						}
-					}
+					if(array_key_exists($language, $this->subPages))
+						return $this->subPages[$language];
 				}
 			}
-			
+
 			/* If all locales have been tried and still none has been found, return the first sub page (that is considered the default) */
-			
-			$result = reset($this->subPages);
-			return $result->lookupSubPage($application, $ids, $index);
+			return reset($this->subPages);
+		}
+	}
+	
+	/**
+	 * @see Page::examineRoute()
+	 */
+	public function examineRoute(Application $application, Route $route, $index = 0)
+	{
+		if($route->indexIsAtRequestedPage($index))
+		{
+			/* Visit itself */
+			$route->visitPage($this);
+
+			/* Parse the locales to separate identifiers and weights */
+			$options = $this->parseLocaleOptions($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
+
+			/* Try to lookup the locale with the highest priority that is defined as sub item */
+			$subPage = $this->findLocalizedSubPage($options);
+
+			/* Examine the localized page */
+			$subPage->examineRoute($application, $route, $index);
 		}
 		else
-			return parent::lookupSubPage($application, $ids, $index);
+			parent::examineRoute($application, $route, $index);
 	}
 }
 ?>

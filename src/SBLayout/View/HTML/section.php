@@ -1,6 +1,7 @@
 <?php
 namespace SBLayout\View\HTML;
 use SBLayout\Model\Application;
+use SBLayout\Model\Route;
 use SBLayout\Model\Page\ContentPage;
 use SBLayout\Model\Section\StaticSection;
 use SBLayout\Model\Section\MenuSection;
@@ -8,12 +9,13 @@ use SBLayout\Model\Section\ContentsSection;
 
 /**
  * Displays a section.
- * 
+ *
  * @param Application $application Encoding of the web application layout and pages
  * @param string $id Id of the section to be displayed
+ * @param Route $route Route from the entry page to current page to be displayed
  * @param ContentPage $currentPage Page to be currently displayed
  */
-function displaySection(Application $application, $id, ContentPage $currentPage)
+function displaySection(Application $application, $id, Route $route, ContentPage $currentPage)
 {
 	$section = $application->sections[$id];
 	
@@ -26,7 +28,7 @@ function displaySection(Application $application, $id, ContentPage $currentPage)
 		}
 		else if($section instanceof MenuSection)
 		{
-			displayMenuSection($application, $section);
+			displayMenuSection($application, $section, $route);
 		}
 		else if($section instanceof ContentsSection)
 		{

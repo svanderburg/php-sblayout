@@ -1,6 +1,7 @@
 <?php
 namespace SBLayout\Model\Page;
 use SBLayout\Model\Application;
+use SBLayout\Model\Route;
 use SBLayout\Model\Page\Content\Contents;
 
 /**
@@ -29,19 +30,20 @@ class DynamicContentPage extends ContentPage
 		$this->param = $param;
 		$this->dynamicSubPage = $dynamicSubPage;
 	}
-	
+
 	/**
-	 * @see Page::lookupSubPage()
+	 * @see Page::examineRoute()
 	 */
-	public function lookupSubPage(Application $application, array $ids, $index = 0)
+	public function examineRoute(Application $application, Route $route, $index = 0)
 	{
-		if(count($ids) == $index)
-			return parent::lookupSubPage($application, $ids, $index);
+		if($route->indexIsAtRequestedPage($index))
+			parent::examineRoute($application, $route, $index);
 		else
 		{
-			$currentId = $ids[$index]; // Take the first id of the array
+			$currentId = $route->getId($index); // Take the first id of the array
 			$GLOBALS["query"][$this->param] = $currentId; // Set the query parameter
-			return $this->dynamicSubPage->lookupSubPage($application, $ids, $index + 1);
+			$route->visitPage($this);
+			$this->dynamicSubPage->examineRoute($application, $route, $index + 1);
 		}
 	}
 }

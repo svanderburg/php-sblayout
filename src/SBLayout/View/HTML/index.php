@@ -49,8 +49,9 @@ function displayRequestedPage(Application $application, $doctype = "html4")
 	/* Set baseURL globally so that others can use it for convenience */
 	setBaseURL();
 	
-	/* Lookup current page */
-	$currentPage = lookupCurrentPage($application);
+	/* Determine page route */
+	$route = determineRoute($application);
+	$currentPage = $route->determineCurrentPage();
 
 	/* Display the controller page */
 	displayController($currentPage);
@@ -78,7 +79,7 @@ function displayRequestedPage(Application $application, $doctype = "html4")
 	<body>
 		<?php
 		foreach($application->sections as $id => $section)
-			displaySection($application, $id, $currentPage);
+			displaySection($application, $id, $route, $currentPage);
 		?>
 	</body>
 </html>

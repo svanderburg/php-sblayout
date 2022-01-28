@@ -1,6 +1,7 @@
 <?php
 namespace SBLayout\Model\Page;
 use SBLayout\Model\Application;
+use SBLayout\Model\Route;
 
 /**
  * Defines a page that can be reached from a link in a menu section or through
@@ -36,15 +37,23 @@ abstract class Page
 	public abstract function checkAccessibility();
 	
 	/**
-	 * Lookup a sub page by using the given ids orginating from the last path components
-	 * of an URL.
-	 * 
-	 * @param Application $application Application layout where the page belongs to
-	 * @param array $ids An array of strings containing URL path components
-	 * @param int $index The current index of the element in the ids array
-	 * @return Page The requested sub page
+	 * Checks all conditions that must be met so that a page is displayed in a menu.
+	 *
+	 * @return bool TRUE if the page should be visible, else FALSE
 	 */
-	public abstract function lookupSubPage(Application $application, array $ids, $index = 0);
+	public function checkVisibleInMenu()
+	{
+		return $this->checkVisibility() && $this->checkAccessibility();
+	}
+	
+	/**
+	 * Examines a route derived from the path components of the requested URL and records all pages visited.
+	 *
+	 * @param Application $application Application layout where the page belongs to
+	 * @param Route $route Route to investigate
+	 * @param int $index The index of the page to be visited
+	 */
+	public abstract function examineRoute(Application $application, Route $route, $index = 0);
 
 	/**
 	 * Computes the base URL from the script name.
