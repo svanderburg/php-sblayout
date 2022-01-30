@@ -98,11 +98,11 @@ class Application
 	public function determineRoute()
 	{
 		if(!array_key_exists("PATH_INFO", $_SERVER) || $_SERVER["PATH_INFO"] == "")
-			$menuPathIds = array(); // If no menu path is given take an empty array
+			$ids = array(); // If no menu path is given take an empty array
 		else
-			$menuPathIds = explode("/", substr($_SERVER["PATH_INFO"], 1)); // Split everything between '/' characters and turn it into an array
+			$ids = explode("/", substr($_SERVER["PATH_INFO"], 1)); // Split everything between '/' characters and turn it into an array
 
-		$route = new Route($menuPathIds);
+		$route = new Route($ids);
 		$this->examineRoute($route);
 		return $route;
 	}

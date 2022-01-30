@@ -11,7 +11,7 @@ use SBLayout\Model\PageNotFoundException;
 class PageAlias extends Page
 {
 	/** Path components to the actual page relative from the entry page */
-	public $menuPathIds;
+	public $ids;
 	
 	/** An associative array mapping URL path components to sub pages */
 	public $subPages;
@@ -28,9 +28,9 @@ class PageAlias extends Page
 		parent::__construct($title);
 
 		if($path == "")
-			$this->menuPathIds = array();
+			$this->ids = array();
 		else
-			$this->menuPathIds = explode("/", $path);
+			$this->ids = explode("/", $path);
 
 		$this->subPages = $subPages;
 	}
@@ -58,7 +58,7 @@ class PageAlias extends Page
 	{
 		if($route->indexIsAtRequestedPage($index))
 		{
-			$route->reset($this->menuPathIds);
+			$route->reset($this->ids);
 			$application->examineRoute($route);
 		}
 		else
