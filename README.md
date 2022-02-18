@@ -12,7 +12,7 @@ turned maintenance of pages into quite a tedious problem.
 This library allows someone to define a web application as a set of pages that
 refer to other sub pages. Developers only have to capture the common aspects,
 such as the sections and style of the entire web application, once and only need
-to provide the individual characteristcs of every additional sub page.
+to provide the individual characteristics of every additional sub page.
 
 The library automatically composes the corresponding pages, and ensures a number
 of non-functional quality attributes, such as a mechanism allowing end users to
@@ -72,7 +72,7 @@ contains a trivial implementation named: `displayRequestedPage()`.
 
 Finally, we always use one single PHP page (invoking the view function) that
 handles all requests to every sub page. The path components that are appended to
-its URL serve as selectors for the subpages of the application. For example:
+its URL serve as selectors for the sub pages of the application. For example:
 
 * `http://localhost/index.php` refers to the entry page of the web application
 * `http://localhost/index.php/a` refers to a sub page reachable from the entry page
@@ -93,26 +93,26 @@ use SBLayout\Model\Section\StaticSection;
 $application = new Application(
     /* Title */
     "Trivial web application",
-    
+
     /* CSS stylesheets */
     array("default.css"),
-    
+
     /* Sections */
     array(
         "header" => new StaticSection("header.php"),
         "contents" => new ContentsSection(true),
         "footer" => new StaticSection("footer.php")
     ),
-    
+
     /* Pages */
     new StaticContentPage("Fruit", new Contents("fruit.php"))
 );
 ```
 
-In the above code fragement, we compose an application model in which every sub
+In the above code fragment, we compose an application model in which every sub
 page consists of three sections. The `header` and `footer` always display the
-same code fragment. The content section is filled with variable text that makes
-every page unique.
+same code fragment. The `contents` section is filled with variable text that
+makes every page unique.
 
 Every sub page has `Trivial web application` in the title and use the style
 settings from the `default.css` stylesheet.
@@ -124,7 +124,7 @@ We can display a sub page by appending the following function invocation to
 \SBLayout\View\HTML\displayRequestedPage($application);
 ```
 
-The above code fragement composes an HTML page from the code snippets for each
+The above code fragment composes an HTML page from the code snippets for each
 section that we have defined in the model. Each section translates to `div`
 elements with their `id` attribute set to their corresponding array key in the
 model).
@@ -196,9 +196,9 @@ the oranges sub page: `http://localhost/index.php/oranges`
 
 Implementing more complex navigation structures
 -----------------------------------------------
-It is also possible to have multiple levels of subpages. For example, we can also
-add sub pages to sub pages and an additional menu section (`submenu`) displaying
-the available sub sub pages per sub page:
+It is also possible to have multiple levels of sub pages. For example, we can
+also add sub pages to sub pages and an additional menu section (`submenu`)
+displaying the available sub sub pages per sub page:
 
 ```php
 /* Sections */
@@ -214,7 +214,7 @@ array(
 new StaticContentPage("Fruit", new Contents("fruit.php"), array(
     "apples" => new StaticContentPage("Apples", new Contents("fruit/apples.php"), array(
         "red" => new StaticContentPage("Red", new Contents("fruit/apples/red.php")),
-        "green" => new StaticContentPage("Red", new Contents("fruit/apples/green.php"))
+        "green" => new StaticContentPage("Green", new Contents("fruit/apples/green.php"))
     )),
     "pears" => new StaticContentPage("Pears", new Contents("fruit/pears.php"), array(
         "yellow" => new StaticContentPage("Yellow", new Contents("fruit/pears/yellow.php")),
@@ -227,7 +227,7 @@ new StaticContentPage("Fruit", new Contents("fruit.php"), array(
 ))
 ```
 
-Similar to the previous example, a submenu section displays the subpages of a
+Similar to the previous example, a `submenu` section displays the sub pages of a
 particular fruit kind.
 
 We can also use the URL to get to a specific sub sub page. For example, the
@@ -240,7 +240,7 @@ not recommended in most cases.
 Error pages
 -----------
 It may also happen that some error occurs while trying to display a page. For
-example, trying to access a subpage that does not exists (e.g.
+example, trying to access a sub page that does not exists (e.g.
 `http://localhost/index.php/oranges/purple`) should display a 404 error page.
 Moreover, pages that are inaccessible should display a 403 error page.
 
@@ -282,7 +282,7 @@ You can do in the body of `checkAccessibility()` whatever you want. For example,
 you can also change it to take some cookie values containing a username and
 password that gets verified against something that is stored in a database.
 
-By adding an object that is in instance of our custom class to a subpage of the
+By adding an object that is in instance of our custom class to a sub page of the
 entry page, we can secure it.
 
 Implementing more complex dynamic layouts
@@ -325,7 +325,7 @@ new StaticContentPage("Fruit", new Contents(array(
         "header" => "fruit/oranges.php",
         "contents" => "fruit/oranges.php"
     )))
-)
+))
 ```
 
 The above model also requires a few additional files that should reside in the
@@ -381,7 +381,7 @@ use SBLayout\Model\Page\DynamicContentPage;
 ```
 
 The following code fragments adds a sub page having a sub page that interprets
-the a component:
+a path component:
 
 ```php
 /* Pages */
@@ -390,7 +390,7 @@ new StaticContentPage("Fruit", new Contents("fruit.php"), array(
     ...
     "fruitname" => new DynamicContentPage("Display fruit name", "fruitname", new Contents("fruitname.php"))
     ...
-)
+))
 ```
 
 The first parameter of the constructor contains the title, the second the name of
@@ -415,7 +415,7 @@ and if we address the page with: `http://localhost/index.php/fruitname/bananas`
 we should see:
 
     bananas
-    
+
 The `DynamicContentPage` constructor also has an optional fourth parameter to
 define additional sub pages or to interpret multiple parameters.
 
@@ -481,7 +481,7 @@ This package includes three example web applications that can be found in the
   pages, dynamic sub pages and a page handling POST requests
 * The `i18n` web application demonstrates an internationalised web page
   displaying the same page in multiple languages
-* The `advanced` web applications demonstraties more advanced sub pages with
+* The `advanced` web applications demonstrates more advanced sub pages with
   multiple content sections. It also demonstrates style and script variability.
 
 API documentation

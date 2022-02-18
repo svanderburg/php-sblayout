@@ -22,7 +22,7 @@ function determineScriptPath($script)
 
 /**
  * Displays a section that includes JavaScript files both on application and page level
- * 
+ *
  * @param Application $application Encoding of the web application layout and pages
  * @param ContentPage $currentPage Page to be currently displayed
  */
