@@ -4,6 +4,7 @@ require_once(dirname(__FILE__)."/../vendor/autoload.php");
 use PHPUnit\Framework\TestCase;
 use SBLayout\Model\Application;
 use SBLayout\Model\PageNotFoundException;
+use SBLayout\Model\Route;
 use SBLayout\Model\Page\HiddenLocalizedContentPage;
 use SBLayout\Model\Page\HiddenStaticContentPage;
 use SBLayout\Model\Page\LocalizedContentPage;
@@ -21,7 +22,7 @@ class LocalizedApplicationTest extends TestCase
 	protected $dePage;
 	protected $application;
 
-	protected function setUp()
+	protected function setUp(): void
 	{
 		$this->nlPage = new StaticContentPage("Nederlands", new Contents("nl.php"));
 		$this->enUSPage = new StaticContentPage("American", new Contents("en-us.php"));
@@ -74,62 +75,78 @@ class LocalizedApplicationTest extends TestCase
 
 	public function testEN_US()
 	{
-		$page = $this->application->lookupSubPage(array("en-us"));
-		$this->assertEquals($this->enUSPage, $page);
+		$route = new Route(array("en-us"));
+		$this->application->examineRoute($route);
+		$currentPage = $route->determineCurrentPage();
+		$this->assertEquals($this->enUSPage, $currentPage);
 	}
 
 	public function testNL()
 	{
-		$page = $this->application->lookupSubPage(array("nl"));
-		$this->assertEquals($this->nlPage, $page);
+		$route = new Route(array("nl"));
+		$this->application->examineRoute($route);
+		$currentPage = $route->determineCurrentPage();
+		$this->assertEquals($this->nlPage, $currentPage);
 	}
 
 	public function testPT()
 	{
 		$this->expectException(PageNotFoundException::class);
-		$page = $this->application->lookupSubPage(array("pt"));
+		$this->application->examineRoute(new Route(array("pt")));
 	}
 
 	public function testRootWithDE_DE()
 	{
 		$_SERVER["HTTP_ACCEPT_LANGUAGE"] = "de-de";
-		$page = $this->application->lookupSubPage(array());
-		$this->assertEquals($this->dePage, $page);
+		$route = new Route(array());
+		$this->application->examineRoute($route);
+		$currentPage = $route->determineCurrentPage();
+		$this->assertEquals($this->dePage, $currentPage);
 	}
 
 	public function testRootWithEN_US()
 	{
 		$_SERVER["HTTP_ACCEPT_LANGUAGE"] = "en-us";
-		$page = $this->application->lookupSubPage(array());
-		$this->assertEquals($this->enUSPage, $page);
+		$route = new Route(array());
+		$this->application->examineRoute($route);
+		$currentPage = $route->determineCurrentPage();
+		$this->assertEquals($this->enUSPage, $currentPage);
 	}
 
 	public function testRootWithDE_CH()
 	{
 		$_SERVER["HTTP_ACCEPT_LANGUAGE"] = "de-ch";
-		$page = $this->application->lookupSubPage(array());
-		$this->assertEquals($this->dePage, $page);
+		$route = new Route(array());
+		$this->application->examineRoute($route);
+		$currentPage = $route->determineCurrentPage();
+		$this->assertEquals($this->dePage, $currentPage);
 	}
 
 	public function testRootWithPT_BR()
 	{
 		$_SERVER["HTTP_ACCEPT_LANGUAGE"] = "pt-br";
-		$page = $this->application->lookupSubPage(array());
-		$this->assertEquals($this->nlPage, $page);
+		$route = new Route(array());
+		$this->application->examineRoute($route);
+		$currentPage = $route->determineCurrentPage();
+		$this->assertEquals($this->nlPage, $currentPage);
 	}
 
 	public function testRootWithMultipleOptions()
 	{
 		$_SERVER["HTTP_ACCEPT_LANGUAGE"] = "en-us,de-de";
-		$page = $this->application->lookupSubPage(array());
-		$this->assertEquals($this->enUSPage, $page);
+		$route = new Route(array());
+		$this->application->examineRoute($route);
+		$currentPage = $route->determineCurrentPage();
+		$this->assertEquals($this->enUSPage, $currentPage);
 	}
 
 	public function testRootWithMultipleOptionsAndPriorities()
 	{
 		$_SERVER["HTTP_ACCEPT_LANGUAGE"] = "en-us;q=0.8,de-de;q=1.0";
-		$page = $this->application->lookupSubPage(array());
-		$this->assertEquals($this->dePage, $page);
+		$route = new Route(array());
+		$this->application->examineRoute($route);
+		$currentPage = $route->determineCurrentPage();
+		$this->assertEquals($this->dePage, $currentPage);
 	}
 }
 ?>

@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use SBLayout\Model\Application;
 use SBLayout\Model\PageForbiddenException;
 use SBLayout\Model\PageNotFoundException;
+use SBLayout\Model\Route;
 use SBLayout\Model\Page\DynamicContentPage;
 use SBLayout\Model\Page\ExternalPage;
 use SBLayout\Model\Page\HiddenStaticContentPage;
@@ -26,7 +27,7 @@ class ApplicationTest extends TestCase
 
 	protected $page11;
 
-	protected function setUp()
+	protected function setUp(): void
 	{
 		$this->page11 = new StaticContentPage("Subpage 1.1", new Contents("page1/subpage11.php"));
 
@@ -87,61 +88,70 @@ class ApplicationTest extends TestCase
 
 	public function testLookupRoot()
 	{
-		$page = $this->application->lookupSubPage(array());
-		$this->assertEquals($this->rootPage, $page);
+		$route = new Route(array());
+		$this->application->examineRoute($route);
+		$currentPage = $route->determineCurrentPage();
+		$this->assertEquals($this->rootPage, $currentPage);
 	}
 
 	public function testLookupPage1()
 	{
-		$page = $this->application->lookupSubPage(array("page1"));
-		$this->assertEquals($this->page1, $page);
+		$route = new Route(array("page1"));
+		$this->application->examineRoute($route);
+		$currentPage = $route->determineCurrentPage();
+		$this->assertEquals($this->page1, $currentPage);
 	}
 
 	public function testLookupSubPage11()
 	{
-		$page = $this->application->lookupSubPage(array("page1", "page11"));
-		$this->assertEquals($this->page11, $page);
+		$route = new Route(array("page1", "page11"));
+		$this->application->examineRoute($route);
+		$currentPage = $route->determineCurrentPage();
+		$this->assertEquals($this->page11, $currentPage);
 	}
 
 	public function testLookupNonExistentPage()
 	{
 		$this->expectException(PageNotFoundException::class);
-		$page = $this->application->lookupSubPage(array("nonexistent"));
+		$this->application->examineRoute(new Route(array("nonexistent")));
 	}
 
 	public function testLookupNonExistentSubPage()
 	{
 		$this->expectException(PageNotFoundException::class);
-		$page = $this->application->lookupSubPage(array("page1", "nonexistent"));
+		$this->application->examineRoute(new Route(array("page1", "nonexistent")));
 	}
 
 	public function testLookupNonExistentSubSubPage()
 	{
 		$this->expectException(PageNotFoundException::class);
-		$page = $this->application->lookupSubPage(array("page1", "page11", "nonexistent"));
+		$this->application->examineRoute(new Route(array("page1", "page11", "nonexistent")));
 	}
 
 	public function testLookupInNonExistentSubPage()
 	{
 		$this->expectException(PageNotFoundException::class);
-		$page = $this->application->lookupSubPage(array("nonexistent", "page11"));
+		$this->application->examineRoute(new Route(array("nonexistent", "page11")));
 	}
 
 	public function testLookupHomeAlias()
 	{
-		$page = $this->application->lookupSubPage(array("home"));
-		$this->assertEquals($this->rootPage, $page);
+		$route = new Route(array("home"));
+		$this->application->examineRoute($route);
+		$currentPage = $route->determineCurrentPage();
+		$this->assertEquals($this->rootPage, $currentPage);
 	}
 
 	public function testLookupInaccessiblePage()
 	{
 		$this->expectException(PageForbiddenException::class);
-		$page = $this->application->lookupSubPage(array("inaccessible"));
+		$this->application->examineRoute(new Route(array("inaccessible")));
 	}
 
 	public function testLookupFirstNameAndLastName()
 	{
-		$page = $this->application->lookupSubPage(array("firstname", "sander", "lastname", "vanderburg"));
+		$route = new Route(array("firstname", "sander", "lastname", "vanderburg"));
+		$this->application->examineRoute($route);
 		$this->assertEquals($GLOBALS["query"], array(
 			"firstname" => "sander",
 			"lastname" => "vanderburg"
