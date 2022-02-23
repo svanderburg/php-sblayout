@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * @brief View-HTML-BaseURL module
+ * @defgroup View-HTML-BaseURL
+ * @{
+ */
 namespace SBLayout\View\HTML;
 use SBLayout\Model\Page\Page;
 
@@ -9,4 +15,8 @@ function setBaseURL()
 {
 	$GLOBALS["baseURL"] = Page::computeBaseURL();
 }
+
+/**
+ * @}
+ */
 ?>

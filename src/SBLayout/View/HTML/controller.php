@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * @brief View-HTML-Controller module
+ * @defgroup View-HTML-Controller
+ * @{
+ */
 namespace SBLayout\View\HTML;
 use SBLayout\Model\Page\ContentPage;
 
@@ -14,4 +20,8 @@ function displayController(ContentPage $currentPage)
 		require(\SBLayout\View\HTML\Util\composeContentPath("controller", $currentPage->contents->controller));
 	}
 }
+
+/**
+ * @}
+ */
 ?>

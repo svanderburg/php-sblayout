@@ -21,6 +21,7 @@ in
       mv doc $out
       mkdir -p $out/nix-support
       echo "doc api $out/share/doc/html" >> $out/nix-support/hydra-build-products
+      vendor/bin/phpunit tests
     '';
   });
 }

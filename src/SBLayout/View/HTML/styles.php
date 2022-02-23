@@ -1,4 +1,11 @@
 <?php
+/**
+ * @file
+ * @brief View-HTML-Styles module
+ * @defgroup View-HTML-Styles
+ * @{
+ */
+
 namespace SBLayout\View\HTML;
 use SBLayout\Model\Application;
 use SBLayout\Model\Page\ContentPage;
@@ -52,4 +59,8 @@ function generateStyleSection(Application $application, ContentPage $currentPage
 		}
 	}
 }
+
+/**
+ * @}
+ */
 ?>

@@ -1,4 +1,11 @@
 <?php
+/**
+ * @file
+ * @brief View-HTML-Util module
+ * @defgroup View-HTML-Util
+ * @{
+ */
+
 namespace SBLayout\View\HTML\Util;
 
 /**
@@ -16,4 +23,8 @@ function composeContentPath($baseDir, $path)
 	else
 		return $baseDir."/".$path; // If path is relative, prefix the basedir
 }
+
+/**
+ * @}
+ */
 ?>

@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * @brief View-HTML-MenuSection module
+ * @defgroup View-HTML-MenuSection
+ * @{
+ */
 namespace SBLayout\View\HTML;
 use SBLayout\Model\Application;
 use SBLayout\Model\Route;
@@ -51,4 +57,8 @@ function displayMenuSection(Application $application, MenuSection $section, Rout
 		}
 	}
 }
+
+/**
+ * @}
+ */
 ?>

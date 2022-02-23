@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * @brief View-HTML-Section module
+ * @defgroup View-HTML-Section
+ * @{
+ */
 namespace SBLayout\View\HTML;
 use SBLayout\Model\Application;
 use SBLayout\Model\Route;
@@ -48,4 +54,8 @@ function displaySection(Application $application, $id, Route $route, ContentPage
 	</div>
 	<?php
 }
+
+/**
+ * @}
+ */
 ?>

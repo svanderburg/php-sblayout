@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * @brief View-HTML-Page module
+ * @defgroup View-HTML-Page
+ * @{
+ */
 namespace SBLayout\View\HTML;
 use SBLayout\Model\Application;
 use SBLayout\Model\PageForbiddenException;
@@ -31,4 +37,8 @@ function determineRoute(Application $application)
 	
 	return $route;
 }
+
+/**
+ * @}
+ */
 ?>

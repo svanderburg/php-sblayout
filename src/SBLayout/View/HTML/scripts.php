@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * @brief View-HTML-Scripts module
+ * @defgroup View-HTML-Scripts
+ * @{
+ */
 namespace SBLayout\View\HTML;
 use SBLayout\Model\Application;
 use SBLayout\Model\Page\ContentPage;
@@ -52,4 +58,8 @@ function generateScriptSection(Application $application, ContentPage $currentPag
 		}
 	}
 }
+
+/**
+ * @}
+ */
 ?>

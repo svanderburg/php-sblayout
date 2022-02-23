@@ -1,10 +1,16 @@
 <?php
+/**
+ * @file
+ * @brief View-HTML-Index module
+ * @defgroup View-HTML-Index
+ * @{
+ */
 namespace SBLayout\View\HTML;
 use SBLayout\Model\Application;
 
 /**
  * Displays the document type declaration.
- * 
+ *
  * @param string $doctype Document type declaration to display. Supported values are: html4, html4transitional, html5
  */
 function displayDoctype($doctype)
@@ -29,6 +35,12 @@ function displayDoctype($doctype)
 	}
 }
 
+/**
+ * Determines the path to the favorite icon
+ *
+ * @param mixed $icon Path to the favorite icon
+ * @return mixed the icon path relative to the base URL
+ */
 function determineFavIconPath($icon)
 {
 	global $baseURL;
@@ -41,8 +53,9 @@ function determineFavIconPath($icon)
 
 /**
  * Displays a simple HTML page containing the sections defined in the application layout.
- * 
+ *
  * @param Application $application Encoding of the web application layout and pages
+ * @param string $doctype Document type declaration to display. Supported values are: html4, html4transitional, html5
  */
 function displayRequestedPage(Application $application, $doctype = "html4")
 {
@@ -85,3 +98,7 @@ function displayRequestedPage(Application $application, $doctype = "html4")
 </html>
 	<?php
 }
+
+/**
+ * @}
+ */
