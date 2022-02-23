@@ -16,12 +16,12 @@ use SBLayout\Model\Section\ContentsSection;
 /**
  * Displays a section.
  *
- * @param Application $application Encoding of the web application layout and pages
- * @param string $id Id of the section to be displayed
- * @param Route $route Route from the entry page to current page to be displayed
- * @param ContentPage $currentPage Page to be currently displayed
+ * @param $application Encoding of the web application layout and pages
+ * @param $id Id of the section to be displayed
+ * @param $route Route from the entry page to current page to be displayed
+ * @param $currentPage Page to be currently displayed
  */
-function displaySection(Application $application, $id, Route $route, ContentPage $currentPage)
+function displaySection(Application $application, string $id, Route $route, ContentPage $currentPage): void
 {
 	$section = $application->sections[$id];
 	

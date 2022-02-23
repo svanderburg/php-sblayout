@@ -9,7 +9,7 @@ class HiddenLocalizedContentPage extends LocalizedContentPage
 	/**
 	 * @see LocalizedPage::__construct()
 	 */
-	public function __construct(array $subPages = NULL)
+	public function __construct(array $subPages = array())
 	{
 		parent::__construct($subPages);
 	}
@@ -17,7 +17,7 @@ class HiddenLocalizedContentPage extends LocalizedContentPage
 	/**
 	 * @see Page::checkVisibility()
 	 */
-	public function checkVisibility()
+	public function checkVisibility(): bool
 	{
 		return false;
 	}

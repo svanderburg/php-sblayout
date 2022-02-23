@@ -13,10 +13,10 @@ use SBLayout\Model\Page\ContentPage;
  * Determines the actual script path. If the path is absolute, it is taken as is.
  * If it is relative it's expanded to a path that included from the scripts/ folder.
  *
- * @param string $script Path to a script file
- * @return string An expanded relative path or the the absolute path
+ * @param $script Path to a script file
+ * @return An expanded relative path or the the absolute path
  */
-function determineScriptPath($script)
+function determineScriptPath(string $script): string
 {
 	global $baseURL;
 	
@@ -29,10 +29,10 @@ function determineScriptPath($script)
 /**
  * Displays a section that includes JavaScript files both on application and page level
  *
- * @param Application $application Encoding of the web application layout and pages
- * @param ContentPage $currentPage Page to be currently displayed
+ * @param $application Encoding of the web application layout and pages
+ * @param $currentPage Page to be currently displayed
  */
-function generateScriptSection(Application $application, ContentPage $currentPage)
+function generateScriptSection(Application $application, ContentPage $currentPage): void
 {
 	/* Include the defined scripts in the application layout */
 	if($application->scripts !== NULL)

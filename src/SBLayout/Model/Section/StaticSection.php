@@ -7,14 +7,14 @@ namespace SBLayout\Model\Section;
 class StaticSection extends Section
 {
 	/** PHP file containing the actual contents of this section */
-	public $contents;
+	public string $contents;
 	
 	/**
 	 * Creates a new StaticSection instance.
 	 *
-	 * @param string $contents PHP file containing the actual contents of this section
+	 * @param $contents PHP file containing the actual contents of this section
 	 */
-	public function __construct($contents)
+	public function __construct(string $contents)
 	{
 		parent::__construct();
 		$this->contents = $contents;

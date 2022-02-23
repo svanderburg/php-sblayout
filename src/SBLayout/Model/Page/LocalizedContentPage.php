@@ -9,21 +9,21 @@ use SBLayout\Model\Route;
  * from the Accept-Language parameter sent by the user agent and displays the page in that
  * language accordingly.
  *
- * If the preferred languages are not supported, it will fallback to the first sub page.
+ * If the preferred languages are not supported, it will fall back to the first sub page.
  */
 class LocalizedContentPage extends StaticContentPage
 {
 	/**
 	 * Creates a new LocalizedContentPage instance.
 	 *
-	 * @param array $subPages An associative array mapping language identifiers (i.e. language-country) to sub pages
+	 * @param $subPages An associative array mapping language identifiers (i.e. language-country) to sub pages
 	 */
-	public function __construct(array $subPages = null)
+	public function __construct(array $subPages = array())
 	{
 		parent::__construct(reset($subPages)->title, reset($subPages)->contents, $subPages);
 	}
 	
-	private function parseLocaleOptions($acceptLanguage)
+	private function parseLocaleOptions(string $acceptLanguage): array
 	{
 		$options = array(); // Stores the preference array
 		$locales = explode(",", $acceptLanguage);
@@ -48,7 +48,7 @@ class LocalizedContentPage extends StaticContentPage
 		return $options;
 	}
 	
-	private function findLocalizedSubPage(array $options)
+	private function findLocalizedSubPage(array $options): Page
 	{
 		foreach($options as $identifier => $weight)
 		{
@@ -77,7 +77,7 @@ class LocalizedContentPage extends StaticContentPage
 	/**
 	 * @see Page::examineRoute()
 	 */
-	public function examineRoute(Application $application, Route $route, $index = 0)
+	public function examineRoute(Application $application, Route $route, int $index = 0): void
 	{
 		if($route->indexIsAtRequestedPage($index))
 		{

@@ -10,7 +10,7 @@ class HiddenStaticContentPage extends StaticContentPage
 	/**
 	 * @see StaticContentPage::__construct()
 	 */
-	public function __construct($title, Contents $contents, array $subPages = null)
+	public function __construct(string $title, Contents $contents, array $subPages = array())
 	{
 		parent::__construct($title, $contents, $subPages);
 	}
@@ -18,7 +18,7 @@ class HiddenStaticContentPage extends StaticContentPage
 	/**
 	 * @see Page::checkVisibility()
 	 */
-	public function checkVisibility()
+	public function checkVisibility(): bool
 	{
 		return false;
 	}

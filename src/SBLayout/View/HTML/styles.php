@@ -14,10 +14,10 @@ use SBLayout\Model\Page\ContentPage;
  * Determines the actual CSS path. If the path is absolute, it is taken as is.
  * If it is relative it's expanded to a path that included from the styles/ folder.
  *
- * @param string $style Path to a CSS file
- * @return string An expanded relative path or the the absolute path
+ * @param $style Path to a CSS file
+ * @return An expanded relative path or the the absolute path
  */
-function determineStylePath($style)
+function determineStylePath(string $style): string
 {
 	global $baseURL;
 	
@@ -30,10 +30,10 @@ function determineStylePath($style)
 /**
  * Displays a section that includes CSS files both on application and page level
  *
- * @param Application $application Encoding of the web application layout and pages
- * @param ContentPage $currentPage Page to be currently displayed
+ * @param $application Encoding of the web application layout and pages
+ * @param $currentPage Page to be currently displayed
  */
-function generateStyleSection(Application $application, ContentPage $currentPage)
+function generateStyleSection(Application $application, ContentPage $currentPage): void
 {
 	/* Include the defined CSS stylesheets in the application layout */
 	if($application->styles !== NULL)

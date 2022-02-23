@@ -10,10 +10,10 @@ use SBLayout\Model\Page\ContentPage;
 
 /**
  * Displays the controller page that handles GET and POST parameters
- * 
- * @param ContentPage $currentPage Page to be currently displayed
+ *
+ * @param $currentPage Page to be currently displayed
  */
-function displayController(ContentPage $currentPage)
+function displayController(ContentPage $currentPage): void
 {
 	if($currentPage->contents->controller !== null)
 	{

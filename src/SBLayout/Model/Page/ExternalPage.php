@@ -9,15 +9,15 @@ use SBLayout\Model\Route;
 class ExternalPage extends Page
 {
 	/** External URL to which the page redirects */
-	public $url;
+	public string $url;
 	
 	/**
 	 * Creates a new ExternalPage instance.
 	 *
-	 * @param string $title Title of the page that is used as a label in a menu section
-	 * @param string $url External URL to which the page redirects
+	 * @param $title Title of the page that is used as a label in a menu section
+	 * @param $url External URL to which the page redirects
 	 */
-	function __construct($title, $url)
+	function __construct(string $title, string $url)
 	{
 		parent::__construct($title);
 		$this->url = $url;
@@ -26,7 +26,7 @@ class ExternalPage extends Page
 	/**
 	 * @see Page::checkVisibility()
 	 */
-	function checkVisibility()
+	function checkVisibility(): bool
 	{
 		return true;
 	}
@@ -34,7 +34,7 @@ class ExternalPage extends Page
 	/**
 	 * @see Page::checkAccessibility()
 	 */
-	function checkAccessibility()
+	function checkAccessibility(): bool
 	{
 		return true;
 	}
@@ -42,7 +42,7 @@ class ExternalPage extends Page
 	/**
 	 * @see Page::examineRoute()
 	 */
-	public function examineRoute(Application $application, Route $route, $index = 0)
+	public function examineRoute(Application $application, Route $route, int $index = 0): void
 	{
 		if($route->indexIsAtRequestedPage($index))
 		{

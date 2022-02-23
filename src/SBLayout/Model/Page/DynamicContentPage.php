@@ -11,20 +11,20 @@ use SBLayout\Model\Page\Content\Contents;
 class DynamicContentPage extends ContentPage
 {
 	/** The name of the query parameter that must be set when retrieving the sub page */
-	public $param;
+	public string $param;
 	
 	/** The dynamic sub page that interprets the URL parameter component */
-	public $dynamicSubPage;
+	public Page $dynamicSubPage;
 	
 	/**
 	 * Create a new DynamicContentPage instance.
 	 *
-	 * @param string $title Title of the page that is used as a label in a menu section
-	 * @param string $param The name of the query parameter that must be set when retrieving the sub page
-	 * @param Contents $contents A content object storing properties of the content sections of a page
-	 * @param Page $dynamicSubPage The dynamic sub page that interprets the URL parameter component
+	 * @param $title Title of the page that is used as a label in a menu section
+	 * @param $param The name of the query parameter that must be set when retrieving the sub page
+	 * @param $contents A content object storing properties of the content sections of a page
+	 * @param $dynamicSubPage The dynamic sub page that interprets the URL parameter component
 	 */
-	public function __construct($title, $param, Contents $contents, Page $dynamicSubPage)
+	public function __construct(string $title, string $param, Contents $contents, Page $dynamicSubPage)
 	{
 		parent::__construct($title, $contents);
 		$this->param = $param;
@@ -34,7 +34,7 @@ class DynamicContentPage extends ContentPage
 	/**
 	 * @see Page::examineRoute()
 	 */
-	public function examineRoute(Application $application, Route $route, $index = 0)
+	public function examineRoute(Application $application, Route $route, int $index = 0): void
 	{
 		if($route->indexIsAtRequestedPage($index))
 			parent::examineRoute($application, $route, $index);

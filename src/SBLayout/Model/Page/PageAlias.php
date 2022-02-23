@@ -11,19 +11,19 @@ use SBLayout\Model\PageNotFoundException;
 class PageAlias extends Page
 {
 	/** Path components to the actual page relative from the entry page */
-	public $ids;
+	public array $ids;
 	
 	/** An associative array mapping URL path components to sub pages */
-	public $subPages;
+	public array $subPages;
 	
 	/**
 	 * Creates a new PageAlias instance.
 	 *
-	 * @param string $title Title of the page that is used as a label in a menu section
-	 * @param string $path Path to the actual page relative from the entry page
-	 * @param array $subPages An associative array mapping ids to sub pages
+	 * @param $title Title of the page that is used as a label in a menu section
+	 * @param $path Path to the actual page relative from the entry page
+	 * @param $subPages An associative array mapping ids to sub pages
 	 */
-	public function __construct($title, $path, array $subPages = null)
+	public function __construct(string $title, string $path, array $subPages = array())
 	{
 		parent::__construct($title);
 
@@ -38,7 +38,7 @@ class PageAlias extends Page
 	/**
 	 * @see Page::checkVisibility()
 	 */
-	public function checkVisibility()
+	public function checkVisibility(): bool
 	{
 		return true;
 	}
@@ -46,7 +46,7 @@ class PageAlias extends Page
 	/**
 	 * @see Page::checkAccessibility()
 	 */
-	public function checkAccessibility()
+	public function checkAccessibility(): bool
 	{
 		return true;
 	}
@@ -54,7 +54,7 @@ class PageAlias extends Page
 	/**
 	 * @see Page::examineRoute()
 	 */
-	public function examineRoute(Application $application, Route $route, $index = 0)
+	public function examineRoute(Application $application, Route $route, int $index = 0): void
 	{
 		if($route->indexIsAtRequestedPage($index))
 		{

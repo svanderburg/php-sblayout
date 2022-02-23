@@ -7,14 +7,14 @@ namespace SBLayout\Model\Section;
 class MenuSection extends Section
 {
 	/** The level in the page hierarchy from which menu links must be displayed */
-	public $level;
+	public int $level;
 	
 	/**
 	 * Creates a new MenuSection instance.
 	 *
-	 * @param id $level The level in the page hierarchy from which menu links must be displayed
+	 * @param $level The level in the page hierarchy from which menu links must be displayed
 	 */
-	public function __construct($level)
+	public function __construct(int $level)
 	{
 		parent::__construct();
 		$this->level = $level;

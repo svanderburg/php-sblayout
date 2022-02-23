@@ -10,38 +10,38 @@ use SBLayout\Model\Page\Page;
 class Application
 {
 	/** Title of the entire application */
-	public $title;
+	public string $title;
 	
 	/** An array of CSS stylesheets used for all pages */
-	public $styles;
+	public array $styles;
 	
 	/** An array of sections of which every page is composed */
-	public $sections;
+	public array $sections;
 	
 	/** The entry page of the application (which itself may refer to other sub pages) */
-	public $entryPage;
+	public Page $entryPage;
 	
-	/** The favorite icon the page should use */
-	public $icon;
+	/** The favorite icon the page should use or NULL if no favorite icon is used */
+	public ?string $icon;
 	
 	/** An array of JavaScript files included by all pages */
-	public $scripts;
+	public array $scripts;
 	
 	/** The character encoding standard that the page should use */
-	public $charset;
+	public string $charset;
 	
 	/**
 	 * Creates a new application instance.
-	 * 
-	 * @param string $title Title of the entire application
-	 * @param array $styles An array of CSS stylesheets used for all pages
-	 * @param array $sections An array of sections of which the page is composed
-	 * @param Page $entryPage The entry page of the application
-	 * @param string $icon The favorite icon the page should use
-	 * @param array $scripts An array of JavaScript files included by all pages
-	 * @param string $charset The character encoding standard that the page should use (defaults to UTF-8)
+	 *
+	 * @param $title Title of the entire application
+	 * @param $styles An array of CSS stylesheets used for all pages
+	 * @param $sections An array of sections of which the page is composed
+	 * @param $entryPage The entry page of the application
+	 * @param $icon The favorite icon the page should use
+	 * @param $scripts An array of JavaScript files included by all pages
+	 * @param $charset The character encoding standard that the page should use (defaults to UTF-8)
 	 */
-	public function __construct($title, array $styles, array $sections, Page $entryPage, $icon = NULL, array $scripts = NULL, $charset = "UTF-8")
+	public function __construct(string $title, array $styles, array $sections, Page $entryPage, string $icon = NULL, array $scripts = array(), string $charset = "UTF-8")
 	{
 		$this->title = $title;
 		$this->styles = $styles;
@@ -55,9 +55,9 @@ class Application
 	/**
 	 * Derives the route to the 403 error page.
 	 *
-	 * @return Route The 403 error page route
+	 * @return The 403 error page route
 	 */
-	public function determine403Route()
+	public function determine403Route(): Route
 	{
 		$route = new Route(array("403"));
 		$this->entryPage->examineRoute($this, $route);
@@ -67,9 +67,9 @@ class Application
 	/**
 	 * Derives the route to the 403 error page.
 	 *
-	 * @return Route The 404 error page route
+	 * @return The 404 error page route
 	 */
-	public function determine404Route()
+	public function determine404Route(): Route
 	{
 		$route = new Route(array("404"));
 		$this->entryPage->examineRoute($this, $route);
@@ -79,11 +79,11 @@ class Application
 	/**
 	 * Examines a route derived from the path components of the requested URL and records all pages visited.
 	 *
-	 * @param Route route Route to investigate
+	 * @param $route Route to investigate
 	 * @throws PageNotFoundException If the page cannot be found
 	 * @throws PageForbiddenException If access to the page is restricted
 	 */
-	public function examineRoute(Route $route)
+	public function examineRoute(Route $route): void
 	{
 		$this->entryPage->examineRoute($this, $route);
 	}
@@ -93,9 +93,9 @@ class Application
 	 *
 	 * @throws PageNotFoundException If the page cannot be found
 	 * @throws PageForbiddenException If access to the page is restricted
-	 * @return Route A route that records all visited pages
+	 * @return A route that records all visited pages
 	 */
-	public function determineRoute()
+	public function determineRoute(): Route
 	{
 		if(!array_key_exists("PATH_INFO", $_SERVER) || $_SERVER["PATH_INFO"] == "")
 			$ids = array(); // If no menu path is given take an empty array

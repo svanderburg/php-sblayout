@@ -8,15 +8,15 @@ use SBLayout\Model\Page\Page;
 class Route
 {
 	/** Path components in the URL that correspond to the IDs of the sub pages */
-	public $ids;
+	public array $ids;
 
 	/** Pages visited to reach the currently opened page */
-	public $pages;
+	public array $pages;
 
 	/**
 	 * Creates a new route instance
 	 *
-	 * @param array ids Path components in the URL that correspond to the IDs of the sub pages
+	 * @param $ids Path components in the URL that correspond to the IDs of the sub pages
 	 */
 	public function __construct(array $ids)
 	{
@@ -26,9 +26,9 @@ class Route
 	/**
 	 * Clears the route so that it can be re-investigated with the given path components
 	 *
-	 * @param array ids Path components in the URL that correspond to the IDs of the sub pages
+	 * @param $ids Path components in the URL that correspond to the IDs of the sub pages
 	 */
-	public function reset(array $ids)
+	public function reset(array $ids): void
 	{
 		$this->ids = $ids;
 		$this->pages = array();
@@ -37,9 +37,9 @@ class Route
 	/**
 	 * Visits the provided page by adding a record
 	 *
-	 * @param Page page Page to visit
+	 * @param $page Page to visit
 	 */
-	public function visitPage(Page $page)
+	public function visitPage(Page $page): void
 	{
 		array_push($this->pages, $page);
 	}
@@ -47,21 +47,21 @@ class Route
 	/**
 	 * Checks whether the given index is the currently requested page.
 	 *
-	 * @param int index Index of a page
-	 * @return bool TRUE if the corresponding page is currently requested, else FALSE
+	 * @param $index Index of a page
+	 * @return TRUE if the corresponding page is currently requested, else FALSE
 	 */
-	public function indexIsAtRequestedPage($index)
+	public function indexIsAtRequestedPage(int $index): bool
 	{
 		return count($this->ids) == $index;
 	}
 
 	/**
 	 * Returns the ID of a sub page.
-	 * 
-	 * @param int index Index of a visited page
-	 * @return string The ID of the visited page
+	 *
+	 * @param $index Index of a visited page
+	 * @return The ID of the visited page
 	 */
-	public function getId($index)
+	public function getId(int $index): string
 	{
 		return $this->ids[$index];
 	}
@@ -69,21 +69,21 @@ class Route
 	/**
 	 * Determines what the currently requested page is.
 	 *
-	 * @return Page Currently requested page
+	 * @return Currently requested page
 	 */
-	public function determineCurrentPage()
+	public function determineCurrentPage(): Page
 	{
 		return $this->pages[count($this->pages) - 1];
 	}
 
 	/**
 	 * Checks whether a page with provided ID was visited on the specified level of a menu section.
-	 * 
-	 * @param string id ID of a page
-	 * @param int level Level of a menu section
-	 * @return bool TRUE if the page was visited, else FALSE
+	 *
+	 * @param $id ID of a page
+	 * @param $level Level of a menu section
+	 * @return TRUE if the page was visited, else FALSE
 	 */
-	public function hasVisitedPageOnLevel($id, $level)
+	public function hasVisitedPageOnLevel(string $id, int $level): bool
 	{
 		return count($this->ids) > $level && $this->ids[$level] == $id;
 	}
@@ -91,10 +91,10 @@ class Route
 	/**
 	 * Composes a base URL for a menu section on a certain level.
 	 *
-	 * @param int level Menu section level
-	 * @return string The base URL for all links in the menu section
+	 * @param $level Menu section level
+	 * @return The base URL for all links in the menu section
 	 */
-	public function composeBaseURL($level)
+	public function composeBaseURL(int $level): string
 	{
 		$basePath = "";
 

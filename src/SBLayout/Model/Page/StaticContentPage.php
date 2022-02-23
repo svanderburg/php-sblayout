@@ -12,16 +12,16 @@ use SBLayout\Model\Page\Content\Contents;
 class StaticContentPage extends ContentPage
 {
 	/** An associative array mapping URL path components to sub pages */
-	public $subPages;
+	public array $subPages;
 
 	/**
 	 * Creates a new ContentPage instance.
 	 *
-	 * @param string $title Title of the page that is used as a label in a menu section
-	 * @param Contents $contents A content object storing properties of the content sections of a page
-	 * @param array $subPages An associative array mapping ids to sub pages
+	 * @param $title Title of the page that is used as a label in a menu section
+	 * @param $contents A content object storing properties of the content sections of a page
+	 * @param $subPages An associative array mapping ids to sub pages
 	 */
-	public function __construct($title, Contents $contents, array $subPages = null)
+	public function __construct(string $title, Contents $contents, array $subPages = array())
 	{
 		parent::__construct($title, $contents);
 		$this->subPages = $subPages;
@@ -30,7 +30,7 @@ class StaticContentPage extends ContentPage
 	/**
 	 * @see Page::examineRoute()
 	 */
-	public function examineRoute(Application $application, Route $route, $index = 0)
+	public function examineRoute(Application $application, Route $route, int $index = 0): void
 	{
 		if($route->indexIsAtRequestedPage($index))
 			parent::examineRoute($application, $route, $index);

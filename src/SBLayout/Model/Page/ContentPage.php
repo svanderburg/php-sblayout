@@ -12,15 +12,15 @@ use SBLayout\Model\Page\Content\Contents;
 class ContentPage extends Page
 {
 	/** A content object storing properties of the content sections of a page */
-	public $contents;
+	public Contents $contents;
 
 	/**
 	 * Creates a new ContentPage instance
 	 *
-	 * @param string $title Title of the page that is used as a label in a menu section
-	 * @param Contents $contents A content object storing properties of the content sections of a page
+	 * @param $title Title of the page that is used as a label in a menu section
+	 * @param $contents A content object storing properties of the content sections of a page
 	 */
-	public function __construct($title, Contents $contents)
+	public function __construct(string $title, Contents $contents)
 	{
 		parent::__construct($title);
 		$this->contents = $contents;
@@ -29,7 +29,7 @@ class ContentPage extends Page
 	/**
 	 * @see Page::checkVisibility()
 	 */
-	public function checkVisibility()
+	public function checkVisibility(): bool
 	{
 		return true;
 	}
@@ -37,7 +37,7 @@ class ContentPage extends Page
 	/**
 	 * @see Page::checkAccessibility()
 	 */
-	public function checkAccessibility()
+	public function checkAccessibility(): bool
 	{
 		return true;
 	}
@@ -45,7 +45,7 @@ class ContentPage extends Page
 	/**
 	 * @see Page::examineRoute()
 	 */
-	public function examineRoute(Application $application, Route $route, $index = 0)
+	public function examineRoute(Application $application, Route $route, int $index = 0): void
 	{
 		if($route->indexIsAtRequestedPage($index))
 		{
