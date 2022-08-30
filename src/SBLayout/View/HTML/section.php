@@ -9,22 +9,23 @@ namespace SBLayout\View\HTML;
 use SBLayout\Model\Application;
 use SBLayout\Model\Route;
 use SBLayout\Model\Page\ContentPage;
+use SBLayout\Model\Section\Section;
 use SBLayout\Model\Section\StaticSection;
 use SBLayout\Model\Section\MenuSection;
 use SBLayout\Model\Section\ContentsSection;
+use SBLayout\Model\Section\CompoundSection;
 
 /**
  * Displays a section.
  *
  * @param $application Encoding of the web application layout and pages
  * @param $id Id of the section to be displayed
+ * @param $section Section to be displayed
  * @param $route Route from the entry page to current page to be displayed
  * @param $currentPage Page to be currently displayed
  */
-function displaySection(Application $application, string $id, Route $route, ContentPage $currentPage): void
+function displaySection(Application $application, string $id, Section $section, Route $route, ContentPage $currentPage): void
 {
-	$section = $application->sections[$id];
-	
 	?>
 	<div id="<?php print($id); ?>">
 		<?php
@@ -49,6 +50,10 @@ function displaySection(Application $application, string $id, Route $route, Cont
 			{
 				require(\SBLayout\View\HTML\Util\composeContentPath($id, $currentPage->contents->sections[$id]));
 			}
+		}
+		else if($section instanceof CompoundSection)
+		{
+			displaySections($application, $route, $currentPage, $section);
 		}
 		?>
 	</div>

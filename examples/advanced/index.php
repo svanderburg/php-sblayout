@@ -11,6 +11,7 @@ use SBLayout\Model\Page\Content\Contents;
 use SBLayout\Model\Section\ContentsSection;
 use SBLayout\Model\Section\MenuSection;
 use SBLayout\Model\Section\StaticSection;
+use SBLayout\Model\Section\CompoundSection;
 
 $application = new Application(
 	/* Title */
@@ -21,10 +22,12 @@ $application = new Application(
 
 	/* Sections */
 	array(
-		"header" => new ContentsSection(false), 
+		"header" => new ContentsSection(false),
 		"menu" => new MenuSection(0),
-		"submenu" => new MenuSection(1),
-		"contents" => new ContentsSection(true),
+		"container" => new CompoundSection(array(
+			"submenu" => new MenuSection(1),
+			"contents" => new ContentsSection(true)
+		)),
 		"footer" => new StaticSection("footer.php"),
 	),
 

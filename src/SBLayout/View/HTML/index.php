@@ -91,8 +91,7 @@ function displayRequestedPage(Application $application, string $doctype = "html4
 
 	<body>
 		<?php
-		foreach($application->sections as $id => $section)
-			displaySection($application, $id, $route, $currentPage);
+		displaySections($application, $route, $currentPage);
 		?>
 	</body>
 </html>

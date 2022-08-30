@@ -21,7 +21,8 @@
           "src/SBLayout/View/HTML/controller.php",
           "src/SBLayout/View/HTML/index.php",
           "src/SBLayout/View/HTML/baseurl.php",
-          "src/SBLayout/View/HTML/section.php"
+          "src/SBLayout/View/HTML/section.php",
+          "src/SBLayout/View/HTML/sections.php"
       ]
   },
   "autoload-dev": {
