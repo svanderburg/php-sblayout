@@ -27,8 +27,8 @@ use SBLayout\Model\Section\CompoundSection;
 function displaySection(Application $application, string $id, Section $section, Route $route, ContentPage $currentPage): void
 {
 	?>
-	<div id="<?php print($id); ?>">
-		<?php
+
+	<div id="<?php print($id); ?>"><?php
 		if($section instanceof StaticSection)
 		{
 			require(\SBLayout\View\HTML\Util\composeContentPath("sections", $section->contents));
@@ -55,8 +55,7 @@ function displaySection(Application $application, string $id, Section $section, 
 		{
 			displaySections($application, $route, $currentPage, $section);
 		}
-		?>
-	</div>
+		?></div>
 	<?php
 }
 

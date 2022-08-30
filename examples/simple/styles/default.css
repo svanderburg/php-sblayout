@@ -124,8 +124,11 @@ button:hover
 	border-left-color: #ffffff;
 	border-bottom-color: #555555;
 	border-right-color: #555555;
+}
 
-	min-height: 1em;
+div#submenu:empty
+{
+	display: none;
 }
 
 #submenu a
@@ -176,23 +179,28 @@ button:hover
 
 @media (min-width: 1024px)
 {
-    #container
-    {
-        flex-direction: row;
-    }
+	#container
+	{
+		flex-direction: row;
+	}
 
-    #submenu
-    {
-        text-align: left;
-        flex-direction: column;
-        justify-content: left;
+	#submenu
+	{
+		text-align: left;
+		flex-direction: column;
+		justify-content: left;
 
-        min-width: 130px;
-    }
+		min-width: 130px;
+	}
 
-    #submenu a
-    {
-        margin-left: 5px;
-        margin-right: 5px;
-    }
+	div#submenu:empty
+	{
+		display: flex;
+	}
+
+	#submenu a
+	{
+		margin-left: 5px;
+		margin-right: 5px;
+	}
 }

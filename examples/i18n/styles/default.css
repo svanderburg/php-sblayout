@@ -124,8 +124,11 @@ button:hover
 	border-left-color: #ffffff;
 	border-bottom-color: #555555;
 	border-right-color: #555555;
+}
 
-	min-height: 1em;
+div#submenu:empty
+{
+	display: none;
 }
 
 #submenu a
