@@ -26,10 +26,10 @@ class Contents
 	 *
 	 * @param $sections An associative array mapping division ids onto files representing HTML content or a string, which represents the contents of the contents division.
 	 * @param $controller A string containing the path to the controller page that handles GET or POST parameters
-	 * @param array $styles An array containing stylesheet files to include when requesting this page 
-	 * @param array $scripts An array containing script files to include when requesting this page
+	 * @param $styles An array containing stylesheet files to include when requesting this page
+	 * @param $scripts An array containing script files to include when requesting this page
 	 */
-	public function __construct(array|string $sections, $controller = NULL, ?array $styles = array(), ?array $scripts = array())
+	public function __construct(array|string $sections, string $controller = null, ?array $styles = array(), ?array $scripts = array())
 	{
 		if(is_array($sections))
 			$this->sections = $sections;
