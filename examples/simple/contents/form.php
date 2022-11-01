@@ -2,7 +2,7 @@
 if(array_key_exists("fullname", $GLOBALS))
 {
 	?>
-	<p>Hi, I believe your full name is: <?php print($GLOBALS["fullname"]); ?></p>
+	<p>Hi, I believe your full name is: <?= $GLOBALS["fullname"] ?></p>
 	<?php
 } 
 else

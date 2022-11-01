@@ -41,7 +41,7 @@ function generateScriptSection(Application $application, ContentPage $currentPag
 		{
 			$scriptPath = determineScriptPath($script);
 			?>
-			<script type="text/javascript" src="<?php print($scriptPath); ?>"></script>
+			<script type="text/javascript" src="<?= $scriptPath ?>"></script>
 			<?php
 		}
 	}
@@ -53,7 +53,7 @@ function generateScriptSection(Application $application, ContentPage $currentPag
 		{
 			$scriptPath = determineScriptPath($script);
 			?>
-			<script type="text/javascript" src="<?php print($scriptPath); ?>"></script>
+			<script type="text/javascript" src="<?= $scriptPath ?>"></script>
 			<?php
 		}
 	}

@@ -20,7 +20,7 @@ use SBLayout\Model\Page\ContentPage;
 function determineStylePath(string $style): string
 {
 	global $baseURL;
-	
+
 	if(substr($style, 0, 1) == "/")
 		return $style;
 	else
@@ -42,11 +42,11 @@ function generateStyleSection(Application $application, ContentPage $currentPage
 		{
 			$stylePath = determineStylePath($style);
 			?>
-			<link rel="stylesheet" type="text/css" href="<?php print($stylePath); ?>">
+			<link rel="stylesheet" type="text/css" href="<?= $stylePath ?>">
 			<?php
 		}
 	}
-			
+
 	/* Include the defined styles in the contents */
 	if($currentPage->contents->styles !== NULL)
 	{
@@ -54,7 +54,7 @@ function generateStyleSection(Application $application, ContentPage $currentPage
 		{
 			$stylePath = determineStylePath($style);
 			?>
-			<link rel="stylesheet" type="text/css" href="<?php print($stylePath); ?>">
+			<link rel="stylesheet" type="text/css" href="<?= $stylePath ?>">
 			<?php
 		}
 	}

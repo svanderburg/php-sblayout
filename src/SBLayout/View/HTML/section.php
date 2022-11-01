@@ -28,7 +28,7 @@ function displaySection(Application $application, string $id, Section $section, 
 {
 	?>
 
-	<div id="<?php print($id); ?>"><?php
+	<div id="<?= $id ?>"><?php
 		if($section instanceof StaticSection)
 		{
 			require(\SBLayout\View\HTML\Util\composeContentPath("sections", $section->contents));
@@ -42,7 +42,7 @@ function displaySection(Application $application, string $id, Section $section, 
 			if($section->displayTitle)
 			{
 				?>
-				<h1><?php print($currentPage->title); ?></h1>
+				<h1><?= $currentPage->title ?></h1>
 				<?php
 			}
 			

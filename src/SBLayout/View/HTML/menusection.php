@@ -44,13 +44,13 @@ function displayMenuSection(Application $application, MenuSection $section, Rout
 					if($subPage instanceof ExternalPage)
 					{
 						?>
-						<a href="<?php print($subPage->url); ?>"><?php print($subPage->title); ?></a>
+						<a href="<?= $subPage->url ?>"><?= $subPage->title ?></a>
 						<?php
 					}
 					else
 					{
 						?>
-						<a<?php if($route->hasVisitedPageOnLevel($id, $section->level) == $id) { ?> class="active"<?php } ?> href="<?php print($_SERVER["SCRIPT_NAME"]); ?>/<?php print($subPath.$id); ?>"><?php print($subPage->title); ?></a>
+						<a<?php if($route->hasVisitedPageOnLevel($id, $section->level) == $id) { ?> class="active"<?php } ?> href="<?= $_SERVER["SCRIPT_NAME"] ?>/<?= $subPath.$id ?>"><?= $subPage->title ?></a>
 						<?php
 					}
 				}

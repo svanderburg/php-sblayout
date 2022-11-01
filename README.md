@@ -434,7 +434,7 @@ We can implement the `fruitname.php` to simply display the parameter:
 
 ```php
 <?php
-<p><?php print($GLOBALS["query"]["fruitname"]); ?></p>
+<p><?= $GLOBALS["query"]["fruitname"] ?></p>
 ?>
 ```
 

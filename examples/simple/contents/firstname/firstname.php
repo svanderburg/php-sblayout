@@ -1,3 +1,3 @@
 <p>
-Hi <?php print($GLOBALS["query"]["firstname"]); ?>!
+Hi <?= $GLOBALS["query"]["firstname"] ?>!
 </p>
