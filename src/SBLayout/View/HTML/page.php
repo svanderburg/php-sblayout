@@ -8,15 +8,13 @@
 namespace SBLayout\View\HTML;
 use SBLayout\Model\Application;
 use SBLayout\Model\Route;
-use SBLayout\Model\PageForbiddenException;
-use SBLayout\Model\PageNotFoundException;
+use SBLayout\Model\PageException;
 
 /**
  * Determines the route from the entry page to the requested page based on the requested URL components.
  *
  * @param $application Encoding of the web application layout and pages
- * @throws PageForbiddenException If the page is inaccessible
- * @throws PageNotFoundException If the page cannot be found
+ * @throws PageException In case an error occured, such as the page cannot be found or access is restricted
  * @return Route from the entry page to current page to be displayed
  */
 function determineRoute(Application $application): Route
@@ -25,17 +23,12 @@ function determineRoute(Application $application): Route
 	{
 		$route = $application->determineRoute();
 	}
-	catch(PageForbiddenException $ex)
+	catch(PageException $ex)
 	{
-		header("HTTP/1.1 403 Forbidden");
-		$route = $application->determine403Route();
+		header("HTTP/1.1 ".$ex->statusCode." ".$ex->headerMessage);
+		$route = $application->determineErrorRoute($ex);
 	}
-	catch(PageNotFoundException $ex)
-	{
-		header("HTTP/1.1 404 Not Found");
-		$route = $application->determine404Route();
-	}
-	
+
 	return $route;
 }
 

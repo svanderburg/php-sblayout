@@ -53,25 +53,14 @@ class Application
 	}
 	
 	/**
-	 * Derives the route to the 403 error page.
+	 * Derives the route to an error page.
 	 *
-	 * @return The 403 error page route
+	 * @param $cause The page exception that triggered the error page
+	 * @return The error page route
 	 */
-	public function determine403Route(): Route
+	public function determineErrorRoute(PageException $cause): Route
 	{
-		$route = new Route(array("403"));
-		$this->entryPage->examineRoute($this, $route);
-		return $route;
-	}
-	
-	/**
-	 * Derives the route to the 403 error page.
-	 *
-	 * @return The 404 error page route
-	 */
-	public function determine404Route(): Route
-	{
-		$route = new Route(array("404"));
+		$route = new Route(array($cause->statusCode));
 		$this->entryPage->examineRoute($this, $route);
 		return $route;
 	}
@@ -80,8 +69,7 @@ class Application
 	 * Examines a route derived from the path components of the requested URL and records all pages visited.
 	 *
 	 * @param $route Route to investigate
-	 * @throws PageNotFoundException If the page cannot be found
-	 * @throws PageForbiddenException If access to the page is restricted
+	 * @throws PageException In case an error occured, such as the page cannot be found or access is restricted
 	 */
 	public function examineRoute(Route $route): void
 	{
@@ -91,9 +79,8 @@ class Application
 	/**
 	 * Looks up the currently requested page to be displayed, by looking at the structure of the current URL
 	 *
-	 * @throws PageNotFoundException If the page cannot be found
-	 * @throws PageForbiddenException If access to the page is restricted
 	 * @return A route that records all visited pages
+	 * @throws PageException In case an error occured, such as the page cannot be found or access is restricted
 	 */
 	public function determineRoute(): Route
 	{
