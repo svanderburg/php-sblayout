@@ -1,5 +1,7 @@
 <?php
 namespace SBLayout\Model\Page;
+use Iterator;
+use ArrayIterator;
 use SBLayout\Model\Application;
 use SBLayout\Model\Route;
 use SBLayout\Model\PageNotFoundException;
@@ -25,6 +27,14 @@ class StaticContentPage extends ContentPage
 	{
 		parent::__construct($title, $contents);
 		$this->subPages = $subPages;
+	}
+
+	/**
+	 * @see Page::subPageIterator()
+	 */
+	public function subPageIterator(): Iterator
+	{
+		return new ArrayIterator($this->subPages);
 	}
 
 	/**

@@ -25,23 +25,7 @@ class ContentPage extends Page
 		parent::__construct($title);
 		$this->contents = $contents;
 	}
-	
-	/**
-	 * @see Page::checkVisibility()
-	 */
-	public function checkVisibility(): bool
-	{
-		return true;
-	}
-	
-	/**
-	 * @see Page::checkAccessibility()
-	 */
-	public function checkAccessibility(): bool
-	{
-		return true;
-	}
-	
+
 	/**
 	 * @see Page::examineRoute()
 	 */

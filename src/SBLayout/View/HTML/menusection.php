@@ -14,11 +14,6 @@ use SBLayout\Model\Page\PageAlias;
 use SBLayout\Model\Page\StaticContentPage;
 use SBLayout\Model\Section\MenuSection;
 
-function hasSubPages(Page $page): bool
-{
-    return (($page instanceof StaticContentPage || $page instanceof PageAlias) && $page->subPages !== NULL);
-}
-
 /**
  * Displays a menu section containing links to sub pages
  *
@@ -30,30 +25,19 @@ function displayMenuSection(Application $application, MenuSection $section, Rout
 {
 	if($section->level <= count($route->ids))
 	{
-		$subPath = $route->composeBaseURL($section->level);
+		$baseURL = $_SERVER["SCRIPT_NAME"].$route->composeBaseURL($section->level);
 		$rootPage = $route->pages[$section->level];
-		
+
 		// Display links to the sub pages
-		
-		if(hasSubPages($rootPage))
+
+		foreach($rootPage->subPageIterator() as $id => $subPage)
 		{
-			foreach($rootPage->subPages as $id => $subPage)
+			if($subPage->checkVisibleInMenu())
 			{
-				if($subPage->checkVisibleInMenu())
-				{
-					if($subPage instanceof ExternalPage)
-					{
-						?>
-						<a href="<?= $subPage->url ?>"><?= $subPage->title ?></a>
-						<?php
-					}
-					else
-					{
-						?>
-						<a<?php if($route->hasVisitedPageOnLevel($id, $section->level) == $id) { ?> class="active"<?php } ?> href="<?= $_SERVER["SCRIPT_NAME"] ?>/<?= $subPath.$id ?>"><?= $subPage->title ?></a>
-						<?php
-					}
-				}
+				$url = $subPage->deriveURL($baseURL, $id);
+				?>
+				<a<?php if($route->hasVisitedPageOnLevel($id, $section->level) == $id) { ?> class="active"<?php } ?> href="<?= $url ?>"><?= $subPage->title ?></a>
+				<?php
 			}
 		}
 	}

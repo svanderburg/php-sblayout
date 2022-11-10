@@ -1,5 +1,7 @@
 <?php
 namespace SBLayout\Model\Page;
+use Iterator;
+use ArrayIterator;
 use SBLayout\Model\Application;
 use SBLayout\Model\Route;
 use SBLayout\Model\PageNotFoundException;
@@ -12,10 +14,10 @@ class PageAlias extends Page
 {
 	/** Path components to the actual page relative from the entry page */
 	public array $ids;
-	
+
 	/** An associative array mapping URL path components to sub pages */
 	public array $subPages;
-	
+
 	/**
 	 * Creates a new PageAlias instance.
 	 *
@@ -34,23 +36,15 @@ class PageAlias extends Page
 
 		$this->subPages = $subPages;
 	}
-	
+
 	/**
-	 * @see Page::checkVisibility()
+	 * @see Page::subPageIterator()
 	 */
-	public function checkVisibility(): bool
+	public function subPageIterator(): Iterator
 	{
-		return true;
+		return new ArrayIterator($this->subPages);
 	}
-	
-	/**
-	 * @see Page::checkAccessibility()
-	 */
-	public function checkAccessibility(): bool
-	{
-		return true;
-	}
-	
+
 	/**
 	 * @see Page::examineRoute()
 	 */

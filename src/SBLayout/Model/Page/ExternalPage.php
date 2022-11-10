@@ -10,7 +10,7 @@ class ExternalPage extends Page
 {
 	/** External URL to which the page redirects */
 	public string $url;
-	
+
 	/**
 	 * Creates a new ExternalPage instance.
 	 *
@@ -22,23 +22,15 @@ class ExternalPage extends Page
 		parent::__construct($title);
 		$this->url = $url;
 	}
-	
+
 	/**
-	 * @see Page::checkVisibility()
+	 * @see Page::deriveURL()
 	 */
-	function checkVisibility(): bool
+	function deriveURL(string $baseURL, string $id): string
 	{
-		return true;
+		return $this->url;
 	}
-	
-	/**
-	 * @see Page::checkAccessibility()
-	 */
-	function checkAccessibility(): bool
-	{
-		return true;
-	}
-	
+
 	/**
 	 * @see Page::examineRoute()
 	 */

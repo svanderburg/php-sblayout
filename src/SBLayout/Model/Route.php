@@ -99,7 +99,10 @@ class Route
 		$basePath = "";
 
 		for($i = 0; $i < $level; $i++)
-			$basePath .= $this->ids[$i]."/";
+		{
+			$currentId = $this->ids[$i];
+			$basePath .= "/".rawurlencode($currentId);
+		}
 
 		return $basePath;
 	}
