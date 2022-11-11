@@ -22,7 +22,10 @@
           "src/SBLayout/View/HTML/index.php",
           "src/SBLayout/View/HTML/baseurl.php",
           "src/SBLayout/View/HTML/section.php",
-          "src/SBLayout/View/HTML/sections.php"
+          "src/SBLayout/View/HTML/sections.php",
+          "src/SBLayout/View/HTML/breadcrumbs.php",
+          "src/SBLayout/View/HTML/sitemap.php",
+          "src/SBLayout/View/HTML/subsitemap.php"
       ]
   },
   "autoload-dev": {

@@ -63,6 +63,8 @@ function displayRequestedPage(Application $application, string $doctype = "html4
 	setBaseURL();
 	
 	/* Determine page route */
+	global $route, $currentPage;
+
 	$route = determineRoute($application);
 	$currentPage = $route->determineCurrentPage();
 

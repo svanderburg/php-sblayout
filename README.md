@@ -499,8 +499,12 @@ and script includes. We can also make pages invisible from menu sections by
 instantiating pages that are prefixed with `Hidden*`.
 
 Moreover, there are two utility functions: the `Page::computeBaseURL()` model
-function and the `setBaseURL()` view function to determine the base directory in
-which the index script resides.
+function and the `\SBLayout\View\HTML\setBaseURL()` view function to determine
+the base directory in which the index script resides.
+
+It is also possible to automatically generate a site map
+(`\SBLayout\View\HTML\displaySiteMap()`) and bread crumbs for the currently
+visited page (`\SBLayout\View\HTML\displayBreadcrumbs()`).
 
 Consult the API documentation for more information.
 

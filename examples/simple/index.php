@@ -37,11 +37,11 @@ $application = new Application(
 	new StaticContentPage("Home", new Contents("home.php"), array(
 		"403" => new HiddenStaticContentPage("Forbidden", new Contents("error/403.php")),
 		"404" => new HiddenStaticContentPage("Page not found", new Contents("error/404.php")),
-		
+
 		"home" => new PageAlias("Home", ""),
-		
+
 		"aliaspage1" => new PageAlias("Alias page 1", "page1"),
-		
+
 		"inaccessible" => new InaccessibleContentPage("Inaccessible", new Contents("page1.php")),
 
 		"page1" => new StaticContentPage("Page 1", new Contents("page1.php"), array(
@@ -53,14 +53,19 @@ $application = new Application(
 			"page21" => new StaticContentPage("Subpage 2.1", new Contents("page2/subpage21.php")),
 			"page22" => new StaticContentPage("Subpage 2.2", new Contents("page2/subpage22.php")),
 			"page23" => new StaticContentPage("Subpage 2.3", new Contents("page2/subpage23.php")))),
-		
-		"form" => new StaticContentPage("Form", new Contents("form.php", "form.php")),
-		
+
 		"firstname" => new DynamicContentPage("First name", "firstname", new Contents("firstname.php"), new StaticContentPage("First name", new Contents("firstname/firstname.php"), array(
 			"lastname" => new DynamicContentPage("Last name", "lastname", new Contents("firstname/lastname.php"), new StaticContentPage("Last name", new Contents("firstname/lastname/lastname.php")))
 		))),
-		
-		"external" => new ExternalPage("External", "http://www.google.com")
+
+		"external" => new ExternalPage("External", "http://www.google.com"),
+
+		"tests" => new StaticContentPage("Tests", new Contents("tests.php"), array(
+			"form" => new StaticContentPage("Form", new Contents("tests/form.php", "tests/form.php")),
+			"breadcrumbs" => new StaticContentPage("Bread crumbs", new Contents("tests/breadcrumbs.php")),
+			"sitemap" => new StaticContentPage("Site map", new Contents("tests/sitemap.php"))
+		))
+
 	)),
 
 	/* Favorite icon */
