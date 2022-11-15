@@ -274,14 +274,16 @@ Error pages
 It may also happen that some error occurs while trying to display a page. For
 example, trying to access a sub page that does not exists (e.g.
 `http://localhost/index.php/oranges/purple`) should display a 404 error page.
-Moreover, pages that are inaccessible should display a 403 error page.
+Moreover, pages that are inaccessible should display a 403 error page and pages
+that fail to process input parameters should return a 400 error page.
 
 These error pages can be defined by adding them as a sub page to the entry page
-with keys `403` and `404`:
+with keys `400`, `403` and `404`:
 
 ```php
 /* Pages */
 new StaticContentPage("Fruit", new Contents("fruit.php"), array(
+    "400" => new HiddenStaticContentPage("Bad request", new Contents("error/400.php")),
     "403" => new HiddenStaticContentPage("Forbidden", new Contents("error/403.php")),
     "404" => new HiddenStaticContentPage("Page not found", new Contents("error/404.php"))
     ...
@@ -401,6 +403,12 @@ location on the filesystem:
 
     controller/
       question.php
+
+In addition to processing the input parameters, controllers can also throw
+exceptions that are instances of the `PageException` class. For example, you
+may want to check the provided user input for the presence of an answer.
+If none was provided, you may want to throw a `BadRequestException` with a
+message that explains to the user that a mandatory input parameter is missing.
 
 Using path components as parameters
 -----------------------------------

@@ -12,6 +12,7 @@ use SBLayout\Model\Page\ContentPage;
  * Displays the controller page that handles GET and POST parameters
  *
  * @param $currentPage Page to be currently displayed
+ * @throws PageException If an error occured while executing the controller
  */
 function displayController(ContentPage $currentPage): void
 {

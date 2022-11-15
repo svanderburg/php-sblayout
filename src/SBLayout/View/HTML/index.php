@@ -7,6 +7,7 @@
  */
 namespace SBLayout\View\HTML;
 use SBLayout\Model\Application;
+use SBLayout\Model\PageException;
 
 /**
  * Displays the document type declaration.
@@ -61,16 +62,24 @@ function displayRequestedPage(Application $application, string $doctype = "html4
 {
 	/* Set baseURL globally so that others can use it for convenience */
 	setBaseURL();
-	
-	/* Determine page route */
+
 	global $route, $currentPage;
 
-	$route = determineRoute($application);
-	$currentPage = $route->determineCurrentPage();
+	try
+	{
+		/* Determine page route */
+		$route = $application->determineRoute();
+		$currentPage = $route->determineCurrentPage();
 
-	/* Display the controller page */
-	displayController($currentPage);
-	
+		/* Display the controller page */
+		displayController($currentPage);
+	}
+	catch(PageException $ex)
+	{
+		$route = redirectToErrorPage($application, $ex);
+		$currentPage = $route->determineCurrentPage();
+	}
+
 	/* Display the doctype */
 	displayDoctype($doctype);
 	?>

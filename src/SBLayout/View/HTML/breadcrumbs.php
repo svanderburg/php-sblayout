@@ -47,7 +47,7 @@ function displayBreadcrumbs(Route $route, int $startIndex = 0, bool $displayRoot
 				else
 					print("&raquo; ");
 				?><a href="<?= $url ?>"><?= $currentPage->title ?></a>
-			<?php
+				<?php
 			}
 		}
 		?>
