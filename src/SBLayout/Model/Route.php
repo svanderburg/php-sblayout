@@ -89,22 +89,36 @@ class Route
 	}
 
 	/**
-	 * Composes a base URL for a menu section on a certain level.
+	 * Composes the URL for the current page or any of its parent pages at a certain level.
 	 *
-	 * @param $level Menu section level
-	 * @return The base URL for all links in the menu section
+	 * @param $baseURL Base URL to prepend to the resulting URL
+	 * @param $level Page level
+	 * @return The URL of the current page or any of its parent pages
 	 */
-	public function composeBaseURL(int $level): string
+	public function composeURLAtLevel(string $baseURL, int $level): string
 	{
-		$basePath = "";
+		$url = $baseURL;
 
 		for($i = 0; $i < $level; $i++)
 		{
 			$currentId = $this->ids[$i];
-			$basePath .= "/".rawurlencode($currentId);
+			$currentPage = $this->pages[$i + 1];
+
+			$url = $currentPage->deriveURL($url, $currentId);
 		}
 
-		return $basePath;
+		return $url;
+	}
+
+	/**
+	 * Composes the URL to the parent page of the currently opened URL.
+	 *
+	 * @param $baseURL Base URL to prepend to the resulting URL
+	 * @return The URL to the parent page
+	 */
+	public function composeParentPageURL(string $baseURL): string
+	{
+		return $this->composeURLAtLevel($baseURL, count($this->ids) - 1);
 	}
 }
 ?>

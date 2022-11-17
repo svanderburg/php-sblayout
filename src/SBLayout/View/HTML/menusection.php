@@ -25,7 +25,7 @@ function displayMenuSection(Application $application, MenuSection $section, Rout
 {
 	if($section->level <= count($route->ids))
 	{
-		$baseURL = $_SERVER["SCRIPT_NAME"].$route->composeBaseURL($section->level);
+		$baseURL = $route->composeURLAtLevel($_SERVER["SCRIPT_NAME"], $section->level);
 		$rootPage = $route->pages[$section->level];
 
 		// Display links to the sub pages
