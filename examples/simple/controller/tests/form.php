@@ -1,7 +1,7 @@
 <?php
 use SBLayout\Model\BadRequestException;
 
-if(count($_POST) > 0) // This is a POST request
+if($_SERVER["REQUEST_METHOD"] == "POST") // This is a POST request
 {
 	if(array_key_exists("firstname", $_POST) && $_POST["firstname"] != ""
 		&& array_key_exists("lastname", $_POST) && $_POST["lastname"] != "")
