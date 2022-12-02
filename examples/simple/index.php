@@ -65,7 +65,12 @@ $application = new Application(
 			"form" => new StaticContentPage("Form", new Contents("tests/form.php", "tests/form.php")),
 			"breadcrumbs" => new StaticContentPage("Bread crumbs", new Contents("tests/breadcrumbs.php")),
 			"sitemap" => new StaticContentPage("Site map", new Contents("tests/sitemap.php")),
-			"parent" => new StaticContentPage("Parent", new Contents("tests/parent.php"))
+			"parent" => new StaticContentPage("Parent", new Contents("tests/parent.php")),
+			"menusection" => new StaticContentPage("Menu section", new Contents("tests/menusection.php"), array(
+				"subpage1" => new StaticContentPage("Sub page 1", new Contents("tests/menusection/subpage1.php")),
+				"subpage2" => new StaticContentPage("Sub page 2", new Contents("tests/menusection/subpage2.php")),
+				"subpage3" => new StaticContentPage("Sub page 3", new Contents("tests/menusection/subpage3.php"))
+			)),
 		))
 
 	)),

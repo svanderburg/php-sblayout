@@ -14,7 +14,9 @@
       "psr-4": { "SBLayout\\": "src/SBLayout" },
       "files": [
           "src/SBLayout/View/HTML/errorpage.php",
+          "src/SBLayout/View/HTML/inlinemenusection.php",
           "src/SBLayout/View/HTML/menusection.php",
+          "src/SBLayout/View/HTML/embeddedmenusection.php",
           "src/SBLayout/View/HTML/Util/composecontentpath.php",
           "src/SBLayout/View/HTML/styles.php",
           "src/SBLayout/View/HTML/scripts.php",

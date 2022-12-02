@@ -19,21 +19,23 @@ use SBLayout\Model\Route;
 function displayBreadcrumbs(Route $route, int $startIndex = 0, bool $displayRoot = false): void
 {
 	?>
-	<p>
+	<p class="breadcrumbs">
 		<?php
 		$first = true;
 		$url = $_SERVER["SCRIPT_NAME"];
+
+		$numOfIds = count($route->ids);
 
 		if($displayRoot)
 		{
 			$currentPage = $route->pages[0];
 			?>
-			<a href="<?= $url ?>"><?= $currentPage->title ?></a>
+			<a href="<?= $url ?>"<?= $numOfIds == 0 ? ' class="active"' : "" ?>><?= $currentPage->title ?></a>
 			<?php
 			$first = false;
 		}
 
-		for($i = 0; $i < count($route->ids); $i++)
+		for($i = 0; $i < $numOfIds; $i++)
 		{
 			$currentId = $route->ids[$i];
 			$currentPage = $route->pages[$i + 1];
@@ -46,7 +48,7 @@ function displayBreadcrumbs(Route $route, int $startIndex = 0, bool $displayRoot
 					$first = false;
 				else
 					print("&raquo; ");
-				?><a href="<?= $url ?>"><?= $currentPage->title ?></a>
+				?><a href="<?= $url ?>"<?= ($i == $numOfIds - 1) ? ' class="active"' : "" ?>><?= $currentPage->title ?></a>
 				<?php
 			}
 		}

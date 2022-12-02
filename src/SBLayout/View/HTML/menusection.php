@@ -24,23 +24,7 @@ use SBLayout\Model\Section\MenuSection;
 function displayMenuSection(Application $application, MenuSection $section, Route $route): void
 {
 	if($section->level <= count($route->ids))
-	{
-		$baseURL = $route->composeURLAtLevel($_SERVER["SCRIPT_NAME"], $section->level);
-		$rootPage = $route->pages[$section->level];
-
-		// Display links to the sub pages
-
-		foreach($rootPage->subPageIterator() as $id => $subPage)
-		{
-			if($subPage->checkVisibleInMenu())
-			{
-				$url = $subPage->deriveURL($baseURL, $id);
-				?>
-				<a<?php if($route->hasVisitedPageOnLevel($id, $section->level) == $id) { ?> class="active"<?php } ?> href="<?= $url ?>"><?= $subPage->title ?></a>
-				<?php
-			}
-		}
-	}
+		displayInlineMenuSection($route, $section->level);
 }
 
 /**

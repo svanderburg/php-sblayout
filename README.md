@@ -510,9 +510,13 @@ Moreover, there are two utility functions: the `Page::computeBaseURL()` model
 function and the `\SBLayout\View\HTML\setBaseURL()` view function to determine
 the base directory in which the index script resides.
 
-It is also possible to automatically generate a site map
-(`\SBLayout\View\HTML\displaySiteMap()`) and bread crumbs for the currently
-visited page (`\SBLayout\View\HTML\displayBreadcrumbs()`).
+This framework also offers specialized features through the following functions:
+* A site map can be generated with: `\SBLayout\View\HTML\displaySiteMap()`
+* Bread crumbs, that show the path to the currently displayed page, can be
+  generated with: `\SBLayout\View\HTML\displayBreadcrumbs()`.
+* It is also possible to embed a menu section in a content page (rather than
+  declaring a menu section) with:
+  `\SBLayout\View\HTML\displayEmbeddedMenuSection()`
 
 Consult the API documentation for more information.
 
