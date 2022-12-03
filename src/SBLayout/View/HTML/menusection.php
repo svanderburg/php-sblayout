@@ -23,8 +23,7 @@ use SBLayout\Model\Section\MenuSection;
  */
 function displayMenuSection(Application $application, MenuSection $section, Route $route): void
 {
-	if($section->level <= count($route->ids))
-		displayInlineMenuSection($route, $section->level);
+	displayInlineMenuSection($route, $section->level);
 }
 
 /**

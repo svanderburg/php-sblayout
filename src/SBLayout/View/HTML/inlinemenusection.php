@@ -16,19 +16,22 @@ use SBLayout\Model\Route;
  */
 function displayInlineMenuSection(Route $route, int $level): void
 {
-	$baseURL = $route->composeURLAtLevel($_SERVER["SCRIPT_NAME"], $level);
-	$rootPage = $route->pages[$level];
-
-	// Display links to the sub pages
-
-	foreach($rootPage->subPageIterator() as $id => $subPage)
+	if($level <= count($route->ids))
 	{
-		if($subPage->checkVisibleInMenu())
+		$baseURL = $route->composeURLAtLevel($_SERVER["SCRIPT_NAME"], $level);
+		$rootPage = $route->pages[$level];
+
+		// Display links to the sub pages
+
+		foreach($rootPage->subPageIterator() as $id => $subPage)
 		{
-			$url = $subPage->deriveURL($baseURL, $id);
-			?>
-			<a<?php if($route->hasVisitedPageOnLevel($id, $level) == $id) { ?> class="active"<?php } ?> href="<?= $url ?>"><?= $subPage->title ?></a>
-			<?php
+			if($subPage->checkVisibleInMenu())
+			{
+				$url = $subPage->deriveURL($baseURL, $id);
+				?>
+				<a<?php if($route->hasVisitedPageOnLevel($id, $level) == $id) { ?> class="active"<?php } ?> href="<?= $url ?>"><?= $subPage->title ?></a>
+				<?php
+			}
 		}
 	}
 }
