@@ -20,4 +20,8 @@ function displayEmbeddedMenuSection(Route $route, int $level): void
 	<div class="menusection"><?php displayInlineMenuSection($route, $level); ?></div>
 	<?php
 }
+
+/**
+ * @}
+ */
 ?>

@@ -27,6 +27,14 @@ class ContentPage extends Page
 	}
 
 	/**
+	 * @see Page::checkActive()
+	 */
+	public function checkActive(Route $route, string $id, int $level): bool
+	{
+		return $route->hasVisitedPageOnLevel($id, $level);
+	}
+
+	/**
 	 * @see Page::examineRoute()
 	 */
 	public function examineRoute(Application $application, Route $route, int $index = 0): void

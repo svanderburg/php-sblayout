@@ -32,6 +32,14 @@ class ExternalPage extends Page
 	}
 
 	/**
+	 * @see Page::checkActive()
+	 */
+	public function checkActive(Route $route, string $id, int $level): bool
+	{
+		return false; // An external page can never be active since it always redirects the user to an external site
+	}
+
+	/**
 	 * @see Page::examineRoute()
 	 */
 	public function examineRoute(Application $application, Route $route, int $index = 0): void

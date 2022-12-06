@@ -28,9 +28,19 @@ function displayInlineMenuSection(Route $route, int $level): void
 			if($subPage->checkVisibleInMenu())
 			{
 				$url = $subPage->deriveURL($baseURL, $id);
-				?>
-				<a<?php if($route->hasVisitedPageOnLevel($id, $level) == $id) { ?> class="active"<?php } ?> href="<?= $url ?>"><?= $subPage->title ?></a>
-				<?php
+
+				if($subPage->checkActive($route, $id, $level))
+				{
+					?>
+					<a class="active" href="<?= $url ?>"><strong><?= $subPage->title ?></strong></a>
+					<?php
+				}
+				else
+				{
+					?>
+					<a href="<?= $url ?>"><?= $subPage->title ?></a>
+					<?php
+				}
 			}
 		}
 	}
