@@ -24,10 +24,11 @@ class PageAlias extends Page
 	 * @param $title Title of the page that is used as a label in a menu section
 	 * @param $path Path to the actual page relative from the entry page
 	 * @param $subPages An associative array mapping ids to sub pages
+	 * @param $menuItem PHP file that renders the menu item. Leaving it null just renders a hyperlink
 	 */
-	public function __construct(string $title, string $path, array $subPages = array())
+	public function __construct(string $title, string $path, array $subPages = array(), string $menuItem = null)
 	{
-		parent::__construct($title);
+		parent::__construct($title, $menuItem);
 
 		if($path == "")
 			$this->ids = array();

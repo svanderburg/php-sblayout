@@ -374,6 +374,61 @@ The above model also requires a few additional files that should reside in the
 
 The above files should display the header for each fruit kind.
 
+Rendering custom menu links
+---------------------------
+By default, `MenuSection`s are automatically populated with hyperlinks only
+containing page titles. This kind of presentation is often flexible enough,
+because hyperlinks can be styled in all kinds of interesting ways with CSS.
+
+In some occasions, it may also be desirable to present a link to a page in a
+completely different way. A custom renderer can be specified with an additional
+parameter to the constructor of a `Page` object:
+
+```php
+new StaticContentPage("Apple", new Contents("apple.php"), "applemenuitem.php")
+```
+
+In the above code fragement, the last parameter (the `$menuItem` parameter)
+specifies the PHP file that decides how it should be rendered in a
+`MenuSection`.
+
+We can use the custom renderer file (`applemenuitem.php`) to present the menu
+link in a different way, such as an item that includes an icon:
+
+```php
+<span>
+    <?php
+    if($active)
+    {
+        ?>
+        <a class="active" href="<?= $url ?>">
+            <img src="<?= $GLOBALS["baseURL"] ?>/image/menu/apple.png" alt="Apple icon">
+            <strong><?= $subPage->title ?></strong>
+        </a>
+        <?php
+    }
+    else
+    {
+        ?>
+        <a href="<?= $url ?>">
+            <img src="<?= $GLOBALS["baseURL"] ?>/image/menu/apple.png" alt="Apple icon">
+            <?= $subPage->title ?>
+        </a>
+        <?php
+    }
+    ?>
+</span>
+```
+
+Every included page that renders a menu item accepts three parameters: `$active`
+indicates whether the link is active, `$url` contains the URL of the link and
+`$subPage` is the sub page that the link refers to.
+
+In the above code fragment, each hyperlink embeds an apple icon. When the menu
+item link is active, the text is also emphasized.
+
+The file shown above should reside in the `menuitems/` folder of a project.
+
 Handling GET or POST parameters
 -------------------------------
 Sometimes it may also be required to process GET or POST parameters, if a sub

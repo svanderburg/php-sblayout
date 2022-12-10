@@ -161,6 +161,16 @@ div#submenu:empty
 	border-right-color: #ffffff;
 }
 
+#submenu a.alternative_link
+{
+	background-color: #00dd11;
+}
+
+#submenu a.alternative_link:hover
+{
+	background-color: #11ff33;
+}
+
 #contents
 {
 	flex: 1;

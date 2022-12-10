@@ -23,10 +23,11 @@ class DynamicContentPage extends ContentPage
 	 * @param $param The name of the query parameter that must be set when retrieving the sub page
 	 * @param $contents A content object storing properties of the content sections of a page
 	 * @param $dynamicSubPage The dynamic sub page that interprets the URL parameter component
+	 * @param $menuItem PHP file that renders the menu item. Leaving it null just renders a hyperlink
 	 */
-	public function __construct(string $title, string $param, Contents $contents, Page $dynamicSubPage)
+	public function __construct(string $title, string $param, Contents $contents, Page $dynamicSubPage, string $menuItem = null)
 	{
-		parent::__construct($title, $contents);
+		parent::__construct($title, $contents, $menuItem);
 		$this->param = $param;
 		$this->dynamicSubPage = $dynamicSubPage;
 	}

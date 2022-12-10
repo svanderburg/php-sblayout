@@ -19,10 +19,11 @@ class ContentPage extends Page
 	 *
 	 * @param $title Title of the page that is used as a label in a menu section
 	 * @param $contents A content object storing properties of the content sections of a page
+	 * @param $menuItem PHP file that renders the menu item. Leaving it null just renders a hyperlink
 	 */
-	public function __construct(string $title, Contents $contents)
+	public function __construct(string $title, Contents $contents, string $menuItem = null)
 	{
-		parent::__construct($title);
+		parent::__construct($title, $menuItem);
 		$this->contents = $contents;
 	}
 

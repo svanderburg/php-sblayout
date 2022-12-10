@@ -10,9 +10,9 @@ class HiddenStaticContentPage extends StaticContentPage
 	/**
 	 * @see StaticContentPage::__construct()
 	 */
-	public function __construct(string $title, Contents $contents, array $subPages = array())
+	public function __construct(string $title, Contents $contents, array $subPages = array(), string $menuItem = null)
 	{
-		parent::__construct($title, $contents, $subPages);
+		parent::__construct($title, $contents, $subPages, $menuItem);
 	}
 	
 	/**

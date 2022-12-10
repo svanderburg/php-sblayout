@@ -14,14 +14,19 @@ abstract class Page
 	/** Title of the page that is used as a label in a menu section */
 	public string $title;
 
+	/** PHP file that renders the menu item. Leaving it null just renders a hyperlink */
+	public ?string $menuItem;
+
 	/**
 	 * Creates a new Page instance.
 	 *
 	 * @param $title Title of the page that is used as a label in a menu section
+	 * @param $menuItem PHP file that renders the menu item. Leaving it null just renders a hyperlink
 	 */
-	public function __construct(string $title)
+	public function __construct(string $title, string $menuItem = null)
 	{
 		$this->title = $title;
+		$this->menuItem = $menuItem;
 	}
 
 	/**

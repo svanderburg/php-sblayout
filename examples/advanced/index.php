@@ -91,6 +91,20 @@ $application = new Application(
 				"contents" => "header/second.php",
 				"header" => "header/second.php"
 			)))
+		)),
+		
+		"menu" => new StaticContentPage("Menu", new Contents(array(
+			"contents" => "menu.php",
+			"header" => "home.php"
+		)), array(
+			"icon" => new StaticContentPage("Icon", new Contents(array(
+				"contents" => "menu/icon.php",
+				"header" => "home.php"
+			)), array(), "menu/icon.php"),
+			"style" => new StaticContentPage("Style", new Contents(array(
+				"contents" => "menu/style.php",
+				"header" => "home.php"
+			)), array(), "menu/style.php")
 		))
 	)),
 

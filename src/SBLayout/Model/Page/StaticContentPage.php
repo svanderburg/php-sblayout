@@ -22,10 +22,11 @@ class StaticContentPage extends ContentPage
 	 * @param $title Title of the page that is used as a label in a menu section
 	 * @param $contents A content object storing properties of the content sections of a page
 	 * @param $subPages An associative array mapping ids to sub pages
+	 * @param $menuItem PHP file that renders the menu item. Leaving it null just renders a hyperlink
 	 */
-	public function __construct(string $title, Contents $contents, array $subPages = array())
+	public function __construct(string $title, Contents $contents, array $subPages = array(), string $menuItem = null)
 	{
-		parent::__construct($title, $contents);
+		parent::__construct($title, $contents, $menuItem);
 		$this->subPages = $subPages;
 	}
 

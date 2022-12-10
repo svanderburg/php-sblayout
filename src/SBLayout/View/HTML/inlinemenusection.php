@@ -28,18 +28,17 @@ function displayInlineMenuSection(Route $route, int $level): void
 			if($subPage->checkVisibleInMenu())
 			{
 				$url = $subPage->deriveURL($baseURL, $id);
+				$active = $subPage->checkActive($route, $id, $level);
 
-				if($subPage->checkActive($route, $id, $level))
-				{
-					?>
-					<a class="active" href="<?= $url ?>"><strong><?= $subPage->title ?></strong></a>
-					<?php
-				}
+				if($subPage->menuItem === null)
+					displayMenuItem($active, $url, $subPage);
 				else
 				{
-					?>
-					<a href="<?= $url ?>"><?= $subPage->title ?></a>
-					<?php
+					$GLOBALS["active"] = $active;
+					$GLOBALS["url"] = $url;
+					$GLOBALS["subPage"] = $subPage;
+
+					require(\SBLayout\View\HTML\Util\composeContentPath("menuitems", $subPage->menuItem));
 				}
 			}
 		}
