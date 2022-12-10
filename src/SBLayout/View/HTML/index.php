@@ -65,6 +65,9 @@ function displayRequestedPage(Application $application, string $doctype = "html4
 
 	global $route, $currentPage;
 
+	/* Emit the content type with character set encoding as a header */
+	header("Content-Type: text/html; charset=".$application->charset);
+
 	try
 	{
 		/* Determine page route */
