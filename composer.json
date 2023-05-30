@@ -15,6 +15,7 @@
       "files": [
           "src/SBLayout/View/HTML/errorpage.php",
           "src/SBLayout/View/HTML/menuitem.php",
+          "src/SBLayout/View/HTML/custommenuitem.php",
           "src/SBLayout/View/HTML/inlinemenusection.php",
           "src/SBLayout/View/HTML/menusection.php",
           "src/SBLayout/View/HTML/embeddedmenusection.php",

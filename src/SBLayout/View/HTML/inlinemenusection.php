@@ -33,13 +33,7 @@ function displayInlineMenuSection(Route $route, int $level): void
 				if($subPage->menuItem === null)
 					displayMenuItem($active, $url, $subPage);
 				else
-				{
-					$GLOBALS["active"] = $active;
-					$GLOBALS["url"] = $url;
-					$GLOBALS["subPage"] = $subPage;
-
-					require(\SBLayout\View\HTML\Util\composeContentPath("menuitems", $subPage->menuItem));
-				}
+					displayCustomMenuItem($active, $url, $subPage);
 			}
 		}
 	}
