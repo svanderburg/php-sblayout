@@ -93,9 +93,10 @@ class Route
 	 *
 	 * @param $baseURL Base URL to prepend to the resulting URL
 	 * @param $level Page level
+	 * @param $argSeparator The symbol that separates arguments
 	 * @return The URL of the current page or any of its parent pages
 	 */
-	public function composeURLAtLevel(string $baseURL, int $level): string
+	public function composeURLAtLevel(string $baseURL, int $level, string $argSeparator = "&amp;"): string
 	{
 		$url = $baseURL;
 
@@ -104,7 +105,7 @@ class Route
 			$currentId = $this->ids[$i];
 			$currentPage = $this->pages[$i + 1];
 
-			$url = $currentPage->deriveURL($url, $currentId);
+			$url = $currentPage->deriveURL($url, $currentId, $argSeparator);
 		}
 
 		return $url;
@@ -114,11 +115,12 @@ class Route
 	 * Composes the URL to the parent page of the currently opened URL.
 	 *
 	 * @param $baseURL Base URL to prepend to the resulting URL
+	 * @param $argSeparator The symbol that separates arguments
 	 * @return The URL to the parent page
 	 */
-	public function composeParentPageURL(string $baseURL): string
+	public function composeParentPageURL(string $baseURL, string $argSeparator = "&amp;"): string
 	{
-		return $this->composeURLAtLevel($baseURL, count($this->ids) - 1);
+		return $this->composeURLAtLevel($baseURL, count($this->ids) - 1, $argSeparator);
 	}
 }
 ?>

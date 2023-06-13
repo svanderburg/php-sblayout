@@ -40,7 +40,7 @@ function displayBreadcrumbs(Route $route, int $startIndex = 0, bool $displayRoot
 			$currentId = $route->ids[$i];
 			$currentPage = $route->pages[$i + 1];
 
-			$url = $currentPage->deriveURL($url, $currentId);
+			$url = $currentPage->deriveURL($url, $currentId, "&amp;");
 
 			if($i >= $startIndex)
 			{

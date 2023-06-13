@@ -32,7 +32,7 @@ function displaySubSiteMap(Page $page, string $baseURL): void
 
 		if($subPage->checkVisibleInMenu())
 		{
-			$url = $subPage->deriveURL($baseURL, $id);
+			$url = $subPage->deriveURL($baseURL, $id, "&amp;");
 			?>
 			<li>
 				<a href="<?= $url ?>"><?= $subPage->title ?></a>

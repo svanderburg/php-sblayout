@@ -74,9 +74,10 @@ abstract class Page
 	 *
 	 * @param $baseURL Base URL of the page
 	 * @param $id Identifier of the page
+	 * @param $argSeparator The symbol that separates arguments
 	 * @return The URL to this page
 	 */
-	public function deriveURL(string $baseURL, string $id): string
+	public function deriveURL(string $baseURL, string $id, string $argSeparator = "&amp;"): string
 	{
 		return $baseURL."/".rawurlencode($id);
 	}

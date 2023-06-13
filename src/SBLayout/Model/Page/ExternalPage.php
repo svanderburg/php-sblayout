@@ -27,7 +27,7 @@ class ExternalPage extends Page
 	/**
 	 * @see Page::deriveURL()
 	 */
-	function deriveURL(string $baseURL, string $id): string
+	function deriveURL(string $baseURL, string $id, string $argSeparator = "&amp;"): string
 	{
 		return $this->url;
 	}
