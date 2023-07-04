@@ -8,10 +8,6 @@
 namespace SBLayout\View\HTML;
 use SBLayout\Model\Application;
 use SBLayout\Model\Route;
-use SBLayout\Model\Page\Page;
-use SBLayout\Model\Page\ExternalPage;
-use SBLayout\Model\Page\PageAlias;
-use SBLayout\Model\Page\StaticContentPage;
 use SBLayout\Model\Section\MenuSection;
 
 /**

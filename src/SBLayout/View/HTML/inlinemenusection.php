@@ -29,11 +29,7 @@ function displayInlineMenuSection(Route $route, int $level): void
 			{
 				$url = $subPage->deriveURL($baseURL, $id, "&amp;");
 				$active = $subPage->checkActive($route, $id, $level);
-
-				if($subPage->menuItem === null)
-					displayMenuItem($active, $url, $subPage);
-				else
-					displayCustomMenuItem($active, $url, $subPage);
+				displayMenuItem($active, $url, $subPage);
 			}
 		}
 	}

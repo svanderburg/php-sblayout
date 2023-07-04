@@ -24,4 +24,8 @@ function displayCustomMenuItem(bool $active, string $url, Page $subPage): void
 
 	require(\SBLayout\View\HTML\Util\composeContentPath("menuitems", $subPage->menuItem));
 }
+
+/**
+ * @}
+ */
 ?>

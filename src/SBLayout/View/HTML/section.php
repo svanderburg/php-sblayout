@@ -14,6 +14,7 @@ use SBLayout\Model\Section\StaticSection;
 use SBLayout\Model\Section\MenuSection;
 use SBLayout\Model\Section\ContentsSection;
 use SBLayout\Model\Section\CompoundSection;
+use SBLayout\Model\Section\SiteMapSection;
 
 /**
  * Displays a section.
@@ -32,6 +33,10 @@ function displaySection(Application $application, string $id, Section $section, 
 		if($section instanceof StaticSection)
 		{
 			require(\SBLayout\View\HTML\Util\composeContentPath("sections", $section->contents));
+		}
+		else if($section instanceof SiteMapSection)
+		{
+			displaySiteMapSection($section, $route);
 		}
 		else if($section instanceof MenuSection)
 		{

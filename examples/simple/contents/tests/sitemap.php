@@ -1,3 +1,3 @@
 <?php
-\SBLayout\View\HTML\displaySiteMap($GLOBALS["application"]);
+\SBLayout\View\HTML\displaySiteMap($GLOBALS["route"]);
 ?>

@@ -533,8 +533,8 @@ new LocalizedContentPage(array(
 ))
 ```
 
-The above code fragment defines a page with translations into Dutch, American,
-British, French and German.
+The above code fragment defines a page with translations into Dutch, American
+English, British English, French and German.
 
 Any user can retrieve a particular translation of a page (such as German) by
 using the following URL:
@@ -554,6 +554,49 @@ the generic variant: `nl`.
 
 If none of the preferred languages is supported, the first option in the array
 will be taken (which is `nl` in our example).
+
+Using site map sections instead of menu sections
+------------------------------------------------
+As explained earlier, menu sections only display reachable pages from the
+currently opened page or any of its parent pages.
+
+It may also be desired to display more advanced menus, such as folding menus or
+mobile navigation menus. These menus can navigate the user to any visible page
+in the application in one go.
+
+To render such menus, it is also possible to use a `SiteMapSection` rather than
+a `MenuSection`. A `SiteMapSection` renders a site map displaying links starting
+from a root page to all visible sub pages and transitive sub pages.
+
+```php
+use SBLayout\Model\Section\SiteMapSection;
+
+/* Sections */
+array(
+    "header" => new StaticSection("header.php"),
+    "menu" => new SiteMapSection(0),
+    "contents" => new ContentsSection(true),
+    "footer" => new StaticSection("footer.php")
+),
+```
+
+In the above example, we are using a `SiteMapSection` for the `menu` section
+rather than a `MenuSection`.
+
+In HTML, a site map is simply a nested unordered list with links. With CSS
+and/or JavaScript such a nested unordered list can be transformed into a dynamic
+menu.
+
+For example, by using CSS, we can style the unordered list in such that a nested
+unordered list become visible when somebody hovers over a parent list item,
+turning it into a folding menu.
+
+With JavaScript, we can augment the DOM representation of the nested unordered
+list with folding buttons and dynamically change the root link into a menu
+button turning it into a mobile navigation menu.
+
+Rendering a site map as a nested unordered list also retains an application's
+ability to remain useful in a text-oriented browser without JavaScript support.
 
 More use cases
 --------------
@@ -584,8 +627,13 @@ This package includes three example web applications that can be found in the
   pages, dynamic sub pages and a page handling POST requests
 * The `i18n` web application demonstrates an internationalised web page
   displaying the same page in multiple languages
-* The `advanced` web applications demonstrates more advanced sub pages with
+* The `advanced` web application demonstrates more advanced sub pages with
   multiple content sections. It also demonstrates style and script variability.
+* The `sitemapmenu` web application shows an advanced example of using a site
+  map section. For screens with a low width, it displays a mobile navigation menu
+  when JavaScript is enabled. When JavaScript is disabled, it displays a vertical
+  folding menu. For screens with a high width, it displays a horizontal folding
+  menu. In text mode, the site map section simply displays a site map.
 
 API documentation
 =================

@@ -7,21 +7,29 @@
  */
 
 namespace SBLayout\View\HTML;
-use SBLayout\Model\Application;
+use SBLayout\Model\Route;
 
 /**
- * Displays a site map with all visitable links of the application.
+ * Displays a site map with all visitable pages and sub pages of a page part of the route
  *
- * @param $application Encoding of the web application layout and pages
+ * @param $route Route from the entry page to current page to be displayed
+ * @param $displayMenuItems Indicates whether to display each page link as a menu item or an ordinary link
+ * @param $baseURL URL of the given page
+ * @param $level Level of a menu section
  */
-function displaySiteMap(Application $application): void
+function displaySiteMap(Route $route, bool $displayMenuItems = false, string $baseURL = null, int $level = 0): void
 {
-	$entryPage = $application->entryPage;
-	$url = $_SERVER["SCRIPT_NAME"];
-	?>
-	<a href="<?= $url ?>"><?= $entryPage->title ?></a>
-	<?php
-	displaySubSiteMap($entryPage, $url);
+	if($baseURL === null)
+		$baseURL = $_SERVER["SCRIPT_NAME"];
+
+	$rootPage = $route->pages[$level];
+
+	if($displayMenuItems)
+		displayMenuItem(true, $baseURL, $rootPage);
+	else
+		displayStandardMenuItem(false, $baseURL, $rootPage);
+
+	displaySubSiteMap($route, $rootPage, $displayMenuItems, $baseURL, $level);
 }
 
 /**

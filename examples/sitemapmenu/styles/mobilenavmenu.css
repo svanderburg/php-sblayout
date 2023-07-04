@@ -1,0 +1,63 @@
+#menu
+{
+	position: relative;
+}
+
+/* Make root menu item visible again */
+#menu > a
+{
+	display: block;
+}
+
+#menu > a img, #menu ul li img
+{
+	float: right;
+	margin-left: 5px;
+	margin-right: 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
+	border-bottom-color: #222222;
+	border-right-color: #222222;
+}
+
+.navmenu_icon_active, .navmenu_unfold_active
+{
+	background-color: #3344ee;
+	border-top-color: #222222 !important;
+	border-left-color: #222222 !important;
+	border-bottom-color: #ffffff !important;
+	border-right-color: #ffffff !important;
+}
+
+#menu ul
+{
+	position: absolute;
+	width: 100%;
+	top: 42px;
+	right: 0;
+	display: none;
+}
+
+.navmenu_active
+{
+	display: block !important;
+}
+
+#menu ul li ul
+{
+	position: static;
+	margin: 0;
+	padding: 0;
+}
+
+#menu ul li:hover ul
+{
+	display: none;
+}
+
+.navsubmenu_active
+{
+	display: block !important;
+}

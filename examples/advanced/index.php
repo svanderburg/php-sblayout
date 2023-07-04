@@ -104,7 +104,11 @@ $application = new Application(
 			"style" => new StaticContentPage("Style", new Contents(array(
 				"contents" => "menu/style.php",
 				"header" => "home.php"
-			)), array(), "menu/style.php")
+			)), array(), "menu/style.php"),
+			"sitemapmenu" => new StaticContentPage("Site map menu", new Contents(array(
+				"contents" => "menu/sitemapmenu.php",
+				"header" => "home.php"
+			)))
 		))
 	)),
 
