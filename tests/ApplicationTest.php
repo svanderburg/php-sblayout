@@ -19,13 +19,13 @@ use Examples\Simple\Model\Page\InaccessibleContentPage;
 
 class ApplicationTest extends TestCase
 {
-	protected $application;
+	protected Application $application;
 
-	protected $rootPage;
+	protected StaticContentPage $rootPage;
 
-	protected $page1;
+	protected StaticContentPage $page1;
 
-	protected $page11;
+	protected StaticContentPage $page11;
 
 	protected function setUp(): void
 	{
@@ -86,7 +86,7 @@ class ApplicationTest extends TestCase
 		);
 	}
 
-	public function testLookupRoot()
+	public function testLookupRoot(): void
 	{
 		$route = new Route(array());
 		$this->application->examineRoute($route);
@@ -94,7 +94,7 @@ class ApplicationTest extends TestCase
 		$this->assertEquals($this->rootPage, $currentPage);
 	}
 
-	public function testLookupPage1()
+	public function testLookupPage1(): void
 	{
 		$route = new Route(array("page1"));
 		$this->application->examineRoute($route);
@@ -102,7 +102,7 @@ class ApplicationTest extends TestCase
 		$this->assertEquals($this->page1, $currentPage);
 	}
 
-	public function testLookupSubPage11()
+	public function testLookupSubPage11(): void
 	{
 		$route = new Route(array("page1", "page11"));
 		$this->application->examineRoute($route);
@@ -110,31 +110,31 @@ class ApplicationTest extends TestCase
 		$this->assertEquals($this->page11, $currentPage);
 	}
 
-	public function testLookupNonExistentPage()
+	public function testLookupNonExistentPage(): void
 	{
 		$this->expectException(PageNotFoundException::class);
 		$this->application->examineRoute(new Route(array("nonexistent")));
 	}
 
-	public function testLookupNonExistentSubPage()
+	public function testLookupNonExistentSubPage(): void
 	{
 		$this->expectException(PageNotFoundException::class);
 		$this->application->examineRoute(new Route(array("page1", "nonexistent")));
 	}
 
-	public function testLookupNonExistentSubSubPage()
+	public function testLookupNonExistentSubSubPage(): void
 	{
 		$this->expectException(PageNotFoundException::class);
 		$this->application->examineRoute(new Route(array("page1", "page11", "nonexistent")));
 	}
 
-	public function testLookupInNonExistentSubPage()
+	public function testLookupInNonExistentSubPage(): void
 	{
 		$this->expectException(PageNotFoundException::class);
 		$this->application->examineRoute(new Route(array("nonexistent", "page11")));
 	}
 
-	public function testLookupHomeAlias()
+	public function testLookupHomeAlias(): void
 	{
 		$route = new Route(array("home"));
 		$this->application->examineRoute($route);
@@ -142,13 +142,13 @@ class ApplicationTest extends TestCase
 		$this->assertEquals($this->rootPage, $currentPage);
 	}
 
-	public function testLookupInaccessiblePage()
+	public function testLookupInaccessiblePage(): void
 	{
 		$this->expectException(PageForbiddenException::class);
 		$this->application->examineRoute(new Route(array("inaccessible")));
 	}
 
-	public function testLookupFirstNameAndLastName()
+	public function testLookupFirstNameAndLastName(): void
 	{
 		$route = new Route(array("firstname", "sander", "lastname", "vanderburg"));
 		$this->application->examineRoute($route);

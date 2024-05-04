@@ -17,10 +17,10 @@ use Examples\I18N\Model\Page\InaccessibleContentPage;
 
 class LocalizedApplicationTest extends TestCase
 {
-	protected $nlPage;
-	protected $enUSPage;
-	protected $dePage;
-	protected $application;
+	protected StaticContentPage $nlPage;
+	protected StaticContentPage $enUSPage;
+	protected StaticContentPage $dePage;
+	protected Application $application;
 
 	protected function setUp(): void
 	{
@@ -73,7 +73,7 @@ class LocalizedApplicationTest extends TestCase
 		);
 	}
 
-	public function testEN_US()
+	public function testEN_US(): void
 	{
 		$route = new Route(array("en-us"));
 		$this->application->examineRoute($route);
@@ -81,7 +81,7 @@ class LocalizedApplicationTest extends TestCase
 		$this->assertEquals($this->enUSPage, $currentPage);
 	}
 
-	public function testNL()
+	public function testNL(): void
 	{
 		$route = new Route(array("nl"));
 		$this->application->examineRoute($route);
@@ -89,13 +89,13 @@ class LocalizedApplicationTest extends TestCase
 		$this->assertEquals($this->nlPage, $currentPage);
 	}
 
-	public function testPT()
+	public function testPT(): void
 	{
 		$this->expectException(PageNotFoundException::class);
 		$this->application->examineRoute(new Route(array("pt")));
 	}
 
-	public function testRootWithDE_DE()
+	public function testRootWithDE_DE(): void
 	{
 		$_SERVER["HTTP_ACCEPT_LANGUAGE"] = "de-de";
 		$route = new Route(array());
@@ -104,7 +104,7 @@ class LocalizedApplicationTest extends TestCase
 		$this->assertEquals($this->dePage, $currentPage);
 	}
 
-	public function testRootWithEN_US()
+	public function testRootWithEN_US(): void
 	{
 		$_SERVER["HTTP_ACCEPT_LANGUAGE"] = "en-us";
 		$route = new Route(array());
@@ -113,7 +113,7 @@ class LocalizedApplicationTest extends TestCase
 		$this->assertEquals($this->enUSPage, $currentPage);
 	}
 
-	public function testRootWithDE_CH()
+	public function testRootWithDE_CH(): void
 	{
 		$_SERVER["HTTP_ACCEPT_LANGUAGE"] = "de-ch";
 		$route = new Route(array());
@@ -122,7 +122,7 @@ class LocalizedApplicationTest extends TestCase
 		$this->assertEquals($this->dePage, $currentPage);
 	}
 
-	public function testRootWithPT_BR()
+	public function testRootWithPT_BR(): void
 	{
 		$_SERVER["HTTP_ACCEPT_LANGUAGE"] = "pt-br";
 		$route = new Route(array());
@@ -131,7 +131,7 @@ class LocalizedApplicationTest extends TestCase
 		$this->assertEquals($this->nlPage, $currentPage);
 	}
 
-	public function testRootWithMultipleOptions()
+	public function testRootWithMultipleOptions(): void
 	{
 		$_SERVER["HTTP_ACCEPT_LANGUAGE"] = "en-us,de-de";
 		$route = new Route(array());
@@ -140,7 +140,7 @@ class LocalizedApplicationTest extends TestCase
 		$this->assertEquals($this->enUSPage, $currentPage);
 	}
 
-	public function testRootWithMultipleOptionsAndPriorities()
+	public function testRootWithMultipleOptionsAndPriorities(): void
 	{
 		$_SERVER["HTTP_ACCEPT_LANGUAGE"] = "en-us;q=0.8,de-de;q=1.0";
 		$route = new Route(array());
