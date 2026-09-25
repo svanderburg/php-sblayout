@@ -1,7 +1,7 @@
 <?php
 require(dirname(__FILE__)."/../../vendor/autoload.php");
 
-error_reporting(E_STRICT | E_ALL);
+error_reporting(E_ALL);
 
 use SBLayout\Model\Application;
 use SBLayout\Model\Section\ContentsSection;
