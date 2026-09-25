@@ -19,7 +19,7 @@ use SBLayout\Model\Section\CompoundSection;
  * @param $currentPage Page to be currently displayed
  * @param $compoundSection Compound section in which the sections are embedded or null if they are on root level
  */
-function displaySections(Application $application, Route $route, ContentPage $currentPage, CompoundSection $compoundSection = null): void
+function displaySections(Application $application, Route $route, ContentPage $currentPage, ?CompoundSection $compoundSection = null): void
 {
 	if($compoundSection === null)
 		$sections = $application->sections;

@@ -21,7 +21,7 @@ class Application
 	/** The entry page of the application (which itself may refer to other sub pages) */
 	public Page $entryPage;
 	
-	/** The favorite icon the page should use or NULL if no favorite icon is used */
+	/** The favorite icon the page should use or null if no favorite icon is used */
 	public ?string $icon;
 	
 	/** An array of JavaScript files included by all pages */
@@ -37,11 +37,11 @@ class Application
 	 * @param $styles An array of CSS stylesheets used for all pages
 	 * @param $sections An array of sections of which the page is composed
 	 * @param $entryPage The entry page of the application
-	 * @param $icon The favorite icon the page should use
+	 * @param $icon The favorite icon the page should use or null if no favorite icon is used
 	 * @param $scripts An array of JavaScript files included by all pages
 	 * @param $charset The character encoding standard that the page should use (defaults to UTF-8)
 	 */
-	public function __construct(string $title, array $styles, array $sections, Page $entryPage, string $icon = NULL, array $scripts = array(), string $charset = "UTF-8")
+	public function __construct(string $title, array $styles, array $sections, Page $entryPage, ?string $icon = null, array $scripts = array(), string $charset = "UTF-8")
 	{
 		$this->title = $title;
 		$this->styles = $styles;

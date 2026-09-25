@@ -19,7 +19,7 @@ class LocalizedContentPage extends StaticContentPage
 	 * @param $subPages An associative array mapping language identifiers (i.e. language-country) to sub pages
 	 * @param $menuItem PHP file that renders the menu item. Leaving it null just renders a hyperlink
 	 */
-	public function __construct(array $subPages = array(), string $menuItem = null)
+	public function __construct(array $subPages = array(), ?string $menuItem = null)
 	{
 		parent::__construct(reset($subPages)->title, reset($subPages)->contents, $subPages, $menuItem);
 	}

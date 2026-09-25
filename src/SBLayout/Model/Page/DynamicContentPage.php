@@ -25,7 +25,7 @@ class DynamicContentPage extends ContentPage
 	 * @param $dynamicSubPage The dynamic sub page that interprets the URL parameter component
 	 * @param $menuItem PHP file that renders the menu item. Leaving it null just renders a hyperlink
 	 */
-	public function __construct(string $title, string $param, Contents $contents, Page $dynamicSubPage, string $menuItem = null)
+	public function __construct(string $title, string $param, Contents $contents, Page $dynamicSubPage, ?string $menuItem = null)
 	{
 		parent::__construct($title, $contents, $menuItem);
 		$this->param = $param;

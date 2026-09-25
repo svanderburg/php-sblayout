@@ -11,7 +11,7 @@ class PageNotFoundException extends PageException
 	 *
 	 * @param $displayMessage Error message to be displayed (optional)
 	 */
-	public function __construct(string $displayMessage = null)
+	public function __construct(?string $displayMessage = null)
 	{
 		parent::__construct(404, "Not Found", $displayMessage);
 	}

@@ -23,7 +23,7 @@ class PageException extends Exception
 	 * @param $message Exception error message
 	 * @param $displayMessage Error message to be displayed (optional)
 	 */
-	public function __construct(int $statusCode, string $message, string $displayMessage = null)
+	public function __construct(int $statusCode, string $message, ?string $displayMessage = null)
 	{
 		parent::__construct($message);
 		$this->headerMessage = $message; // Make a copy of the message so that it can be used in the HTTP header

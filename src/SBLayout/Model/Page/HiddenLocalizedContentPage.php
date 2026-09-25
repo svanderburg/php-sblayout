@@ -9,7 +9,7 @@ class HiddenLocalizedContentPage extends LocalizedContentPage
 	/**
 	 * @see LocalizedPage::__construct()
 	 */
-	public function __construct(array $subPages = array(), string $menuItem = null)
+	public function __construct(array $subPages = array(), ?string $menuItem = null)
 	{
 		parent::__construct($subPages, $menuItem);
 	}

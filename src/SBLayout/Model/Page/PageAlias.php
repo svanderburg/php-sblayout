@@ -26,7 +26,7 @@ class PageAlias extends Page
 	 * @param $subPages An associative array mapping ids to sub pages
 	 * @param $menuItem PHP file that renders the menu item. Leaving it null just renders a hyperlink
 	 */
-	public function __construct(string $title, string $path, array $subPages = array(), string $menuItem = null)
+	public function __construct(string $title, string $path, array $subPages = array(), ?string $menuItem = null)
 	{
 		parent::__construct($title, $menuItem);
 

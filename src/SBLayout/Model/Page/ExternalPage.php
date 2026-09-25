@@ -18,7 +18,7 @@ class ExternalPage extends Page
 	 * @param $url External URL to which the page redirects
 	 * @param $menuItem PHP file that renders the menu item. Leaving it null just renders a hyperlink
 	 */
-	function __construct(string $title, string $url, string $menuItem = null)
+	function __construct(string $title, string $url, ?string $menuItem = null)
 	{
 		parent::__construct($title, $menuItem);
 		$this->url = $url;
